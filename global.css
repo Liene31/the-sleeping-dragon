@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+/* Variables */
+
+:root {
+  --color-bg-dark: #1d0e09;
+  --color-dark-1: #3c342e;
+  --color-dark-2: #302924;
+  --color-dark-3: #4e4842;
+  --color-opacity: #1a0c09; /* Opacity 70%*/
+  --color-yellow: #eeb84c;
+  --color-accent: #ebdbab;
+  --font-primary: "Cardo", serif;
+  --font-secondary: "Cinzel Decorative", serif;
+
+  /* @media (prefers-color-scheme: dark) {
+    --primary-dark-color: #0b141a;
+    --primary-light-color: #452a3a;
+  } */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-dark);
+  height: 100vh;
+}
+
+header {
+  background-color: var(--color-dark-2);
+
+  .inner-header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 850px;
+    margin: 0 auto;
+
+    nav ul {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}
+
+main {
+  background-image: url(./images/dragon-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 1% 45%;
+  max-width: 850px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+footer {
+  background-color: var(--color-dark-2);
+
+  .inner-footer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 850px;
+    margin: 0 auto;
+
+    ul {
+      display: flex;
+    }
+  }
+}
