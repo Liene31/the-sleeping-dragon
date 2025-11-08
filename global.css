@@ -34,6 +34,7 @@ body {
 
 header {
   background-color: var(--color-dark-2);
+  padding: 0.5rem 0.9rem;
 
   .inner-header {
     display: flex;
@@ -61,6 +62,7 @@ main {
 
 footer {
   background-color: var(--color-dark-2);
+  padding: 0.5rem 0.9rem;
 
   .inner-footer {
     display: flex;
@@ -70,6 +72,13 @@ footer {
 
     ul {
       display: flex;
+      gap: 0.4rem;
+
+      /* check how to add img */
+      .social-logo {
+        filter: invert(77%) sepia(22%) saturate(1175%) hue-rotate(354deg)
+          brightness(98%) contrast(90%);
+      }
     }
   }
 }
