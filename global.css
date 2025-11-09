@@ -18,12 +18,9 @@
   --color-accent: #ebdbab;
   --font-primary: "Cardo", serif;
   --font-secondary: "Cinzel Decorative", serif;
-
-  /* @media (prefers-color-scheme: dark) {
-    --primary-dark-color: #0b141a;
-    --primary-light-color: #452a3a;
-  } */
 }
+
+/* @media (min-width: 650px) { ... } means if the screen is bigger then 650px, do this*/
 
 body {
   display: flex;
@@ -39,12 +36,40 @@ header {
   .inner-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width: 850px;
     margin: 0 auto;
 
-    nav ul {
-      display: flex;
-      gap: 1rem;
+    nav {
+      display: block;
+
+      @media (max-width: 650px) {
+        display: none;
+      }
+
+      ul {
+        display: flex;
+        gap: 2rem;
+
+        a {
+          font-family: var(--font-primary);
+          font-size: 1rem;
+          text-transform: uppercase;
+          color: var(--color-yellow);
+        }
+      }
+    }
+
+    .hamburger-menu {
+      @media (min-width: 650px) {
+        display: none;
+      }
+    }
+
+    .site-theme {
+      @media (max-width: 650px) {
+        display: none;
+      }
     }
   }
 }
@@ -67,14 +92,20 @@ footer {
   .inner-footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width: 850px;
     margin: 0 auto;
+
+    .copy-right p {
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      color: var(--color-yellow);
+    }
 
     ul {
       display: flex;
       gap: 0.4rem;
 
-      /* check how to add img */
       .social-logo {
         filter: invert(77%) sepia(22%) saturate(1175%) hue-rotate(354deg)
           brightness(98%) contrast(90%);
