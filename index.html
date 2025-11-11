@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JS -->
+    <script defer src="./main.js"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,13 +33,17 @@
         <div class="site-theme">
           <img src="./images/mode-symbol.svg" alt="mode icon" width="30px" />
         </div>
-        <div class="hamburger-menu">
+        <div class="hamburger-menu" id="hamburger-menu">
           <img
             src="./images/hamburger-menu.svg"
             alt="hamburger menu icon"
             width="30px"
           />
         </div>
+
+        <!-- check if this can stay here -->
+        <!-- opens the hamburger menu on smaller screens -->
+        <div class="menu" id="menu"></div>
       </div>
     </header>
     <main>
