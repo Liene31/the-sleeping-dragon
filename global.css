@@ -131,3 +131,11 @@ footer {
   padding-top: 4em;
   text-align: center;
 }
+
+.close-menu-btn {
+  display: none;
+}
+
+.material-icons {
+  color: var(--color-yellow);
+}
