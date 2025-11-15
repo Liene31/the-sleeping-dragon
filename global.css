@@ -48,18 +48,21 @@ header {
         gap: 2rem;
       }
 
+      /* Issue when clicking X without choosing where to navigate. on the big screen there are no menu elements */
       .menu {
         @media (max-width: 650px) {
           display: none;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
           position: fixed;
-          padding-top: 2rem;
-          gap: 1rem;
+          gap: 2rem;
           background: var(--color-dark-1);
           top: 44px;
           left: 0;
           right: 0;
+
+          /* Need to fix the bottom value, currently is fixed, or make it to 0 */
           bottom: 44px;
         }
         .display-light-mode {
@@ -75,6 +78,10 @@ header {
           font-size: 1rem;
           text-transform: uppercase;
           color: var(--color-yellow);
+
+          @media (max-width: 650px) {
+            font-size: 1.5rem;
+          }
         }
       }
     }
