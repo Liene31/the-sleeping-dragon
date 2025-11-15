@@ -43,10 +43,6 @@ header {
     nav {
       display: block;
 
-      @media (max-width: 650px) {
-        display: none;
-      }
-
       ul {
         display: flex;
         gap: 2rem;
@@ -60,7 +56,26 @@ header {
       }
     }
 
+    .menu {
+      @media (max-width: 650px) {
+        display: none;
+        position: fixed;
+        padding-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background: var(--color-dark-1);
+        top: 44px;
+        left: 0;
+        right: 0;
+        bottom: 44px;
+      }
+    }
+
     .hamburger-menu {
+      /* position: fixed; */
+      /* z-index: 100; */
+
       @media (min-width: 650px) {
         display: none;
       }
@@ -70,6 +85,14 @@ header {
       @media (max-width: 650px) {
         display: none;
       }
+    }
+
+    /* Add effects on hover */
+    /* Make a different cursor */
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
   }
 }
@@ -98,7 +121,7 @@ footer {
 
     .copy-right p {
       font-family: var(--font-primary);
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: var(--color-yellow);
     }
 
@@ -112,24 +135,6 @@ footer {
       }
     }
   }
-}
-
-/* Add in media, since should happen only on the small screens */
-.menu {
-  display: none;
-  position: fixed;
-  transform: translateY(0%);
-  transition: transform 0.2s;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 99;
-  background-color: var(--color-dark-1);
-  color: var(--text-color-light);
-  list-style: none;
-  padding-top: 4em;
-  text-align: center;
 }
 
 .close-menu-btn {
