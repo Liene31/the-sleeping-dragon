@@ -63,7 +63,7 @@ header {
           right: 0;
 
           /* Need to fix the bottom value, currently is fixed, or make it to 0 */
-          bottom: 44px;
+          bottom: 0;
         }
         .display-light-mode {
           display: none;
