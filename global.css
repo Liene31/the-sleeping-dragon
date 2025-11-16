@@ -13,7 +13,7 @@
   --color-dark-1: #3c342e;
   --color-dark-2: #302924;
   --color-dark-3: #4e4842;
-  --color-opacity: #1a0c09; /* Opacity 70%*/
+  --color-opacity: rgba(26, 12, 9, 0.7); /* Opacity 70%*/
   --color-yellow: #eeb84c;
   --color-accent: #ebdbab;
   --font-primary: "Cardo", serif;
@@ -63,7 +63,7 @@ header {
           right: 0;
 
           /* Need to fix the bottom value, currently is fixed, or make it to 0 */
-          bottom: 0;
+          bottom: 44px;
         }
         .display-light-mode {
           display: none;
