@@ -26,6 +26,13 @@
   gap: 1.5rem;
   width: 100%;
 
+  @media (min-width: 650px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+  }
+
   .mode {
     display: flex;
     flex-direction: column;
@@ -37,6 +44,10 @@
     width: 75%;
     padding: 1rem;
     cursor: pointer;
+
+    @media (min-width: 650px) {
+      width: auto;
+    }
 
     h3 {
       font-family: var(--font-primary);
