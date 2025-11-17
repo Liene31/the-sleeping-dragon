@@ -65,7 +65,7 @@
         <h1>The Sleeping Dragon</h1>
         <h2>Guess a secret word before the dragon awakens</h2>
         <div class="game-modes">
-          <div class="mode">
+          <div class="mode" id="classical-mode">
             <h3>classical</h3>
             <p>Choose from three levels - easy, medium or difficult</p>
           </div>
@@ -85,9 +85,14 @@
       </section>
 
       <!-- Classical Mode - Difficulty Levels Modal -->
-      <section class="difficulty-level-modal">
+      <section class="difficulty-level-modal" id="difficulty-level-modal">
         <button>
-          <span class="material-icons difficulty-lvl-close-btn"> close </span>
+          <span
+            class="material-icons difficulty-lvl-close-btn"
+            id="difficulty-lvl-close-btn"
+          >
+            close
+          </span>
         </button>
         <div class="difficulty-levels-container">
           <div class="difficulty-level">Easy</div>

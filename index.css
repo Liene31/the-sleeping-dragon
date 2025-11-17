@@ -39,11 +39,12 @@
     align-items: center;
     gap: 0.5rem;
     border: 1px solid var(--color-yellow);
-    background: var(--color-opacity);
+    background-color: var(--color-opacity);
     border-radius: 4rem 0.5rem 4rem 0.5rem;
     width: 75%;
     padding: 1rem;
     cursor: pointer;
+    color: var(--color-yellow);
 
     @media (min-width: 650px) {
       width: auto;
@@ -51,7 +52,7 @@
 
     h3 {
       font-family: var(--font-primary);
-      color: var(--color-yellow);
+      /* color: var(--color-yellow); */
       text-transform: uppercase;
       font-size: 1rem;
     }
@@ -64,13 +65,19 @@
       font-size: 0.95rem;
       max-width: 265px;
     }
+
+    &:hover {
+      background-color: var(--color-yellow);
+      border: 1px solid var(--color-dark-2);
+      color: var(--color-dark-2);
+    }
   }
 }
 
 /* Difficulty Level Modal */
 
 .difficulty-level-modal {
-  display: flex; /*block, none*/
+  display: none; /*flex, none*/
   flex-direction: column;
   position: fixed;
   width: 300px;

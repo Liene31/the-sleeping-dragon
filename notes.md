@@ -13,6 +13,9 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - Need to fix the bottom value, currently is fixed, or make it to 0 (NAV when open)
 - BTN Add effects on hover
 - Make a different cursor (?)
+- when difficulty level open, and nav is open, the levels stays, and the nav menu is not visible
+- fix the size of the modal (small/big screen). Maybe put full background so items below can't be pressed
+- fix the on hover for mods. Currently paragraph doesn't change the color
 
 #HELPERS:
 

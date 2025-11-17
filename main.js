@@ -1,3 +1,8 @@
+const classicalModeDiv = document.getElementById("classical-mode");
+const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
+const difficultyLvlCloseBtn = document.getElementById(
+  "difficulty-lvl-close-btn"
+);
 const hamburgerMenuBtn = document.getElementById("hamburger-menu");
 
 let isHamburgerMenuClicked = true;
@@ -24,4 +29,14 @@ hamburgerMenuBtn.addEventListener("click", () => {
       document.querySelector(".menu").style.display = "none";
     }
   }
+});
+
+//Opens Difficulty Levels (Classical Mode)
+classicalModeDiv.addEventListener("click", () => {
+  difficultyLvlModalSec.style.display = "flex";
+});
+
+//Closes Difficulty Levels (Classical Mode)
+difficultyLvlCloseBtn.addEventListener("click", () => {
+  difficultyLvlModalSec.style.display = "none";
 });
