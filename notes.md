@@ -21,6 +21,7 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - check how to correctly add material icons (currently might be loading everything)
 - remove copy on qwerty (otherwise it offers word to search by Google)
 - use for qwerty absolute/relative/fixed ???
+- screen height 100vh ???
 
 #HELPERS:
 

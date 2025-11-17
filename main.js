@@ -11,6 +11,7 @@ let isHamburgerMenuClicked = true;
 const dragonEyeDiv = document.getElementById("dragon-eye");
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
+const homeBtn = document.getElementById("home-btn");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -66,8 +67,6 @@ difficultyLevelDiv.forEach((div) => {
     drawEyeClosed(8);
     drawTile(wordLength, wordTileDiv);
     drawQwerty();
-    console.log(wordTileDiv);
-    console.log(qwertyDiv);
   });
 });
 
