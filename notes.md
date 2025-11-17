@@ -17,6 +17,8 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - fix the size of the modal (small/big screen). Maybe put full background so items below can't be pressed
 - fix the on hover for mods. Currently paragraph doesn't change the color
 - hover/focus
+- check secondary font-family
+- check how to correctly add material icons (currently might be loading everything)
 
 #HELPERS:
 
