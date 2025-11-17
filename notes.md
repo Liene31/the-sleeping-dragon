@@ -16,6 +16,7 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - when difficulty level open, and nav is open, the levels stays, and the nav menu is not visible
 - fix the size of the modal (small/big screen). Maybe put full background so items below can't be pressed
 - fix the on hover for mods. Currently paragraph doesn't change the color
+- hover/focus
 
 #HELPERS:
 

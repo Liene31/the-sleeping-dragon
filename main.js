@@ -1,10 +1,11 @@
 const classicalModeDiv = document.getElementById("classical-mode");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
+const homeViewSec = document.getElementById("home-view");
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
+const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
 const hamburgerMenuBtn = document.getElementById("hamburger-menu");
-
 let isHamburgerMenuClicked = true;
 
 //Toggle hamburger menu
@@ -31,12 +32,22 @@ hamburgerMenuBtn.addEventListener("click", () => {
   }
 });
 
-//Opens Difficulty Levels (Classical Mode)
+//Open Difficulty Levels (Classical Mode)
 classicalModeDiv.addEventListener("click", () => {
   difficultyLvlModalSec.style.display = "flex";
 });
 
-//Closes Difficulty Levels (Classical Mode)
+//Close Difficulty Levels (Classical Mode)
 difficultyLvlCloseBtn.addEventListener("click", () => {
   difficultyLvlModalSec.style.display = "none";
+});
+
+// Navigate to GAME PLAY CLASSICAL
+difficultyLevelDiv.forEach((div) => {
+  div.addEventListener("click", () => {
+    if (div.textContent === "Easy") {
+      homeViewSec.style.display = "none";
+      difficultyLvlModalSec.style.display = "none";
+    }
+  });
 });

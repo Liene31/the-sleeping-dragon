@@ -1,5 +1,5 @@
 .home-view {
-  display: flex;
+  display: none; /*flex, none*/
   flex-direction: column;
   align-items: center;
   gap: 2rem;
@@ -119,7 +119,14 @@
       text-align: center;
       color: var(--color-yellow);
       font-family: var(--font-primary);
+      font-weight: bold;
       text-transform: uppercase;
+
+      &:hover {
+        background-color: var(--color-yellow);
+        border: 1px solid var(--color-dark-2);
+        color: var(--color-dark-2);
+      }
     }
   }
 }
