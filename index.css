@@ -66,3 +66,53 @@
     }
   }
 }
+
+/* Difficulty Level Modal */
+
+.difficulty-level-modal {
+  display: flex; /*block, none*/
+  flex-direction: column;
+  position: fixed;
+  width: 300px;
+  height: 430px;
+  border-radius: 0.5rem;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background: var(--color-dark-1);
+
+  button {
+    background: transparent;
+    border: none;
+    align-self: flex-end;
+    padding: 1rem;
+  }
+
+  .difficulty-lvl-close-btn {
+    color: var(--color-yellow);
+    cursor: pointer;
+  }
+
+  .difficulty-levels-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+
+    .difficulty-level {
+      border: 1px solid var(--color-yellow);
+      background: var(--color-dark-2);
+      border-radius: 4rem 0.5rem 4rem 0.5rem;
+      width: 60%;
+      padding: 1.5rem;
+      cursor: pointer;
+      text-align: center;
+      color: var(--color-yellow);
+      font-family: var(--font-primary);
+      text-transform: uppercase;
+    }
+  }
+}
