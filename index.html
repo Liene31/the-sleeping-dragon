@@ -69,7 +69,7 @@
             <h3>classical</h3>
             <p>Choose from three levels - easy, medium or difficult</p>
           </div>
-          <div class="mode">
+          <div class="mode" id="timed-mode">
             <h3>timed</h3>
             <p>Challenge yourself with timed mode</p>
           </div>
@@ -116,8 +116,8 @@
 
           <!-- TITLE -->
           <div class="title">
-            <h4>Classical - easy level</h4>
-            <p>8 guesses, free hint</p>
+            <h4 id="game-play-view-title"></h4>
+            <p id="game-play-view-desc"></p>
           </div>
 
           <!-- HOME BTN -->
@@ -130,6 +130,12 @@
 
         <!-- DRAGON EYES (GUESSES) -->
         <div class="dragon-eye" id="dragon-eye"></div>
+
+        <!-- TIMER -->
+        <div class="timer-container" id="timer-container">
+          <span class="material-icons"> timer </span>
+          <span class="timer">00 : 10</span>
+        </div>
 
         <!-- HINTS -->
         <div class="hint">

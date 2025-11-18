@@ -10,8 +10,7 @@ Ctrl + Shift + V (Windows / Linux) => preview
 
 - fix the game-mode DIVs to be centered
 - Issue when clicking X without choosing where to navigate. on the big screen there are no menu elements
-- Need to fix the bottom value, currently is fixed, or make it to 0 (NAV when open)
-- BTN Add effects on hover
+- Make nav sticky so it stays to the upper part
 - Make a different cursor (?)
 - when difficulty level open, and nav is open, the levels stays, and the nav menu is not visible
 - fix the size of the modal (small/big screen). Maybe put full background so items below can't be pressed

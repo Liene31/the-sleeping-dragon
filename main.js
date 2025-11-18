@@ -1,4 +1,7 @@
 const classicalModeDiv = document.getElementById("classical-mode");
+const timedModeDiv = document.getElementById("timed-mode");
+const gamePlayViewTitle = document.getElementById("game-play-view-title");
+const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
 const homeViewSec = document.getElementById("home-view");
 const gamePlayViewSec = document.getElementById("game-play-view");
@@ -18,6 +21,9 @@ const qwertyArray = [
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
   ["Z", "X", "C", "V", "B", "N", "M"],
 ];
+
+// test -> it will be array of API
+const wordLength = 5;
 
 //Toggle hamburger menu
 hamburgerMenuBtn.addEventListener("click", () => {
@@ -56,19 +62,42 @@ difficultyLvlCloseBtn.addEventListener("click", () => {
 // Navigate to GAME PLAY CLASSICAL
 difficultyLevelDiv.forEach((div) => {
   div.addEventListener("click", () => {
-    if (div.textContent === "Easy") {
-      homeViewSec.style.display = "none";
-      difficultyLvlModalSec.style.display = "none";
-      gamePlayViewSec.style.display = "flex";
-    }
+    difficultyLvlModalSec.style.display = "none";
 
-    // test
-    const wordLength = 5;
-    drawEyeClosed(8);
-    drawTile(wordLength, wordTileDiv);
-    drawQwerty();
+    if (div.textContent === "Easy") {
+      openGamePlayView(8);
+      gamePlayViewTitle.textContent = "Classical - Easy Level";
+      gamePlayViewDescPara.textContent = "8 guesses, free hint";
+    } else if (div.textContent === "Medium") {
+      openGamePlayView(6);
+      gamePlayViewTitle.textContent = "Classical - Medium Level";
+      gamePlayViewDescPara.textContent = "6 guesses, free hint";
+    } else if (div.textContent === "Difficult") {
+      openGamePlayView(5);
+      gamePlayViewTitle.textContent = "Classical - Difficult Level";
+      gamePlayViewDescPara.textContent = "5 guesses, no free hint";
+    }
   });
 });
+
+// Navigate to GAME PLAY TIMED
+timedModeDiv.addEventListener("click", () => {
+  const timerContainerDiv = document.getElementById("timer-container");
+  openGamePlayView(6);
+  gamePlayViewTitle.textContent = "Timed";
+  gamePlayViewDescPara.textContent = "6 guesses, free hint";
+  timerContainerDiv.style.display = "flex";
+  //add timer
+});
+
+function openGamePlayView(guesses) {
+  homeViewSec.style.display = "none";
+  gamePlayViewSec.style.display = "flex";
+
+  drawEyeClosed(guesses);
+  drawTile(wordLength, wordTileDiv);
+  drawQwerty();
+}
 
 function drawEyeClosed(guess) {
   for (let i = 0; i < guess; i++) {
