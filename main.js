@@ -1,13 +1,16 @@
 const classicalModeDiv = document.getElementById("classical-mode");
 const timedModeDiv = document.getElementById("timed-mode");
+const categoryModeDiv = document.getElementById("category-mode");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
+const chooseCategoryModalSec = document.getElementById("choose-category-modal");
 const homeViewSec = document.getElementById("home-view");
 const gamePlayViewSec = document.getElementById("game-play-view");
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
+const categoryCloseBtn = document.getElementById("category-close-btn");
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
 const hamburgerMenuBtn = document.getElementById("hamburger-menu");
 let isHamburgerMenuClicked = true;
@@ -57,6 +60,16 @@ classicalModeDiv.addEventListener("click", () => {
 //Close Difficulty Levels (Classical Mode)
 difficultyLvlCloseBtn.addEventListener("click", () => {
   difficultyLvlModalSec.style.display = "none";
+});
+
+//Open Category Modal
+categoryModeDiv.addEventListener("click", () => {
+  chooseCategoryModalSec.style.display = "flex";
+});
+
+//Close Category Modal
+categoryCloseBtn.addEventListener("click", () => {
+  chooseCategoryModalSec.style.display = "none";
 });
 
 // Navigate to GAME PLAY CLASSICAL

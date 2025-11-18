@@ -22,6 +22,10 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - use for qwerty absolute/relative/fixed ???
 - screen height 100vh ???
 
+## JS
+
+- MODAL (CSS + JS) -> make it more like template (can be used on the others)
+
 #HELPERS:
 
 - If on the load there are variables which are not in current index page
