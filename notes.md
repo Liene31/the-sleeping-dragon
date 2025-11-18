@@ -21,6 +21,8 @@ Ctrl + Shift + V (Windows / Linux) => preview
 - remove copy on qwerty (otherwise it offers word to search by Google)
 - use for qwerty absolute/relative/fixed ???
 - screen height 100vh ???
+- check definition visual
+- Learning Mode need to change the hint, since the definition is already there
 
 ## JS
 

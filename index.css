@@ -263,6 +263,17 @@
     }
   }
 
+  .definition {
+    display: none; /*block, none*/
+    background-color: var(--color-opacity);
+    color: var(--color-accent);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+  }
+
   .word-tile {
     display: flex;
     justify-content: center;

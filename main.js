@@ -2,6 +2,7 @@ const classicalModeDiv = document.getElementById("classical-mode");
 const timedModeDiv = document.getElementById("timed-mode");
 const categoryModeDiv = document.getElementById("category-mode");
 const learningModeDiv = document.getElementById("learning-mode");
+const definitionDiv = document.getElementById("definition");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
@@ -20,6 +21,7 @@ const dragonEyeDiv = document.getElementById("dragon-eye");
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
 const homeBtn = document.getElementById("home-btn");
+const hintBtn = document.getElementById("hint-btn");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -72,6 +74,11 @@ categoryModeDiv.addEventListener("click", () => {
 //Close Category Modal
 categoryCloseBtn.addEventListener("click", () => {
   chooseCategoryModalSec.style.display = "none";
+});
+
+// Open the hint btn
+hintBtn.addEventListener("click", () => {
+  definitionDiv.style.display = "block";
 });
 
 // Navigate to GAME PLAY CLASSICAL
@@ -127,6 +134,7 @@ categoryDiv.forEach((category) => {
 // Navigate to GAME PLAY LEARNING
 learningModeDiv.addEventListener("click", () => {
   openGamePlayView(6);
+  definitionDiv.style.display = "block";
   gamePlayViewTitle.textContent = "Learning";
   gamePlayViewDescPara.textContent = "6 guesses, free hint";
 });
