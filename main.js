@@ -1,28 +1,12 @@
-const classicalModeDiv = document.getElementById("classical-mode");
-const timedModeDiv = document.getElementById("timed-mode");
-const categoryModeDiv = document.getElementById("category-mode");
-const learningModeDiv = document.getElementById("learning-mode");
 const definitionDiv = document.getElementById("definition");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
 const chooseCategoryModalSec = document.getElementById("choose-category-modal");
-const homeViewSec = document.getElementById("home-view");
-const gamePlayViewSec = document.getElementById("game-play-view");
-const difficultyLvlCloseBtn = document.getElementById(
-  "difficulty-lvl-close-btn"
-);
-const categoryCloseBtn = document.getElementById("category-close-btn");
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
 const categoryDiv = document.querySelectorAll(".category");
-const hamburgerMenuBtn = document.getElementById("hamburger-menu");
-let isHamburgerMenuClicked = true;
-const dragonEyeDiv = document.getElementById("dragon-eye");
-const wordTileDiv = document.getElementById("word-tile");
-const qwertyDiv = document.getElementById("qwerty");
-const homeBtn = document.getElementById("home-btn");
-const hintBtn = document.getElementById("hint-btn");
 
+let isHamburgerMenuClicked = true;
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -33,7 +17,7 @@ const qwertyArray = [
 const wordLength = 5;
 
 //Toggle hamburger menu
-hamburgerMenuBtn.addEventListener("click", () => {
+document.getElementById("hamburger-menu").addEventListener("click", () => {
   const hamburgerMenuIconSpan = document.getElementById("hamburger-menu-icon");
   const closeMenuIconSpan = document.getElementById("close-menu-icon");
 
@@ -57,27 +41,29 @@ hamburgerMenuBtn.addEventListener("click", () => {
 });
 
 //Open Difficulty Levels (Classical Mode)
-classicalModeDiv.addEventListener("click", () => {
+document.getElementById("classical-mode").addEventListener("click", () => {
   difficultyLvlModalSec.style.display = "flex";
 });
 
 //Close Difficulty Levels (Classical Mode)
-difficultyLvlCloseBtn.addEventListener("click", () => {
-  difficultyLvlModalSec.style.display = "none";
-});
+document
+  .getElementById("difficulty-lvl-close-btn")
+  .addEventListener("click", () => {
+    difficultyLvlModalSec.style.display = "none";
+  });
 
 //Open Category Modal
-categoryModeDiv.addEventListener("click", () => {
+document.getElementById("category-mode").addEventListener("click", () => {
   chooseCategoryModalSec.style.display = "flex";
 });
 
 //Close Category Modal
-categoryCloseBtn.addEventListener("click", () => {
+document.getElementById("category-close-btn").addEventListener("click", () => {
   chooseCategoryModalSec.style.display = "none";
 });
 
 // Open the hint btn
-hintBtn.addEventListener("click", () => {
+document.getElementById("hint-btn").addEventListener("click", () => {
   definitionDiv.style.display = "block";
 });
 
@@ -107,7 +93,7 @@ difficultyLevelDiv.forEach((level) => {
 });
 
 // Navigate to GAME PLAY TIMED
-timedModeDiv.addEventListener("click", () => {
+document.getElementById("timed-mode").addEventListener("click", () => {
   const timerContainerDiv = document.getElementById("timer-container");
   openGamePlayView(6);
   gamePlayViewTitle.textContent = "Timed";
@@ -141,7 +127,7 @@ categoryDiv.forEach((category) => {
 });
 
 // Navigate to GAME PLAY LEARNING
-learningModeDiv.addEventListener("click", () => {
+document.getElementById("learning-mode").addEventListener("click", () => {
   openGamePlayView(6);
   definitionDiv.style.display = "block";
   gamePlayViewTitle.textContent = "Learning";
@@ -149,6 +135,9 @@ learningModeDiv.addEventListener("click", () => {
 });
 
 function openGamePlayView(guesses) {
+  const homeViewSec = document.getElementById("home-view");
+  const gamePlayViewSec = document.getElementById("game-play-view");
+  const wordTileDiv = document.getElementById("word-tile");
   homeViewSec.style.display = "none";
   gamePlayViewSec.style.display = "flex";
 
@@ -158,6 +147,7 @@ function openGamePlayView(guesses) {
 }
 
 function drawEyeClosed(guess) {
+  const dragonEyeDiv = document.getElementById("dragon-eye");
   for (let i = 0; i < guess; i++) {
     const imgEL = document.createElement("img");
     imgEL.classList.add("eye-closed");
@@ -181,6 +171,7 @@ function drawTile(length, targetDiv, array) {
 }
 
 function drawQwertyRow(tile, index) {
+  const qwertyDiv = document.getElementById("qwerty");
   for (let i = 0; i < 1; i++) {
     const qwertyRowDiv = document.createElement("div");
     qwertyRowDiv.classList.add("qwerty-row");
