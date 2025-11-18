@@ -12,7 +12,15 @@ const qwertyArray = [
 ];
 
 // test -> it will be array of API
-const wordLength = 12;
+//Easy to 5
+//Medium 5 to 7
+//Difficult 7 to 10
+//Timed all ? MAX 10
+//Categories MAX 10
+// Animals, Gastronomy, Geography, Hobbies
+//Learning All MAX 10
+
+const wordLength = 10;
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {

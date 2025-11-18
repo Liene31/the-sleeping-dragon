@@ -231,8 +231,8 @@
     gap: 0.2rem;
 
     .tile {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 0.2rem;
       background-color: var(--color-accent);
       border: 1px solid var(--color-dark-2);
