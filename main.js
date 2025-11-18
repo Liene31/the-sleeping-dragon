@@ -12,7 +12,7 @@ const qwertyArray = [
 ];
 
 // test -> it will be array of API
-const wordLength = 5;
+const wordLength = 15;
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
