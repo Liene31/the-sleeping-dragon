@@ -25,6 +25,7 @@ Ctrl + Shift + V (Windows / Linux) => preview
 ## JS
 
 - MODAL (CSS + JS) -> make it more like template (can be used on the others)
+- Use switch with if/else ?
 
 #HELPERS:
 

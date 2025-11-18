@@ -1,6 +1,7 @@
 const classicalModeDiv = document.getElementById("classical-mode");
 const timedModeDiv = document.getElementById("timed-mode");
 const categoryModeDiv = document.getElementById("category-mode");
+const learningModeDiv = document.getElementById("learning-mode");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
@@ -12,6 +13,7 @@ const difficultyLvlCloseBtn = document.getElementById(
 );
 const categoryCloseBtn = document.getElementById("category-close-btn");
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
+const categoryDiv = document.querySelectorAll(".category");
 const hamburgerMenuBtn = document.getElementById("hamburger-menu");
 let isHamburgerMenuClicked = true;
 const dragonEyeDiv = document.getElementById("dragon-eye");
@@ -73,19 +75,19 @@ categoryCloseBtn.addEventListener("click", () => {
 });
 
 // Navigate to GAME PLAY CLASSICAL
-difficultyLevelDiv.forEach((div) => {
-  div.addEventListener("click", () => {
+difficultyLevelDiv.forEach((level) => {
+  level.addEventListener("click", () => {
     difficultyLvlModalSec.style.display = "none";
 
-    if (div.textContent === "Easy") {
+    if (level.textContent === "Easy") {
       openGamePlayView(8);
       gamePlayViewTitle.textContent = "Classical - Easy Level";
       gamePlayViewDescPara.textContent = "8 guesses, free hint";
-    } else if (div.textContent === "Medium") {
+    } else if (level.textContent === "Medium") {
       openGamePlayView(6);
       gamePlayViewTitle.textContent = "Classical - Medium Level";
       gamePlayViewDescPara.textContent = "6 guesses, free hint";
-    } else if (div.textContent === "Difficult") {
+    } else if (level.textContent === "Difficult") {
       openGamePlayView(5);
       gamePlayViewTitle.textContent = "Classical - Difficult Level";
       gamePlayViewDescPara.textContent = "5 guesses, no free hint";
@@ -101,6 +103,32 @@ timedModeDiv.addEventListener("click", () => {
   gamePlayViewDescPara.textContent = "6 guesses, free hint";
   timerContainerDiv.style.display = "flex";
   //add timer
+});
+
+// Navigate to GAME PLAY CATEGORY
+categoryDiv.forEach((category) => {
+  category.addEventListener("click", () => {
+    openGamePlayView(6);
+    chooseCategoryModalSec.style.display = "none";
+    gamePlayViewDescPara.textContent = "6 guesses, free hint";
+
+    if (category.textContent === "Animals") {
+      gamePlayViewTitle.textContent = "Category - Animals";
+    } else if (category.textContent === "Sport") {
+      gamePlayViewTitle.textContent = "Category - Sport";
+    } else if (category.textContent === "Birds") {
+      gamePlayViewTitle.textContent = "Category - Birds";
+    } else if (category.textContent === "Countries") {
+      gamePlayViewTitle.textContent = "Category - Countries";
+    }
+  });
+});
+
+// Navigate to GAME PLAY LEARNING
+learningModeDiv.addEventListener("click", () => {
+  openGamePlayView(6);
+  gamePlayViewTitle.textContent = "Learning";
+  gamePlayViewDescPara.textContent = "6 guesses, free hint";
 });
 
 function openGamePlayView(guesses) {
