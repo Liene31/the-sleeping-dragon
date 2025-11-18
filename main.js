@@ -86,18 +86,22 @@ difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
     difficultyLvlModalSec.style.display = "none";
 
-    if (level.textContent === "Easy") {
-      openGamePlayView(8);
-      gamePlayViewTitle.textContent = "Classical - Easy Level";
-      gamePlayViewDescPara.textContent = "8 guesses, free hint";
-    } else if (level.textContent === "Medium") {
-      openGamePlayView(6);
-      gamePlayViewTitle.textContent = "Classical - Medium Level";
-      gamePlayViewDescPara.textContent = "6 guesses, free hint";
-    } else if (level.textContent === "Difficult") {
-      openGamePlayView(5);
-      gamePlayViewTitle.textContent = "Classical - Difficult Level";
-      gamePlayViewDescPara.textContent = "5 guesses, no free hint";
+    switch (level.textContent) {
+      case "Easy":
+        openGamePlayView(8);
+        gamePlayViewTitle.textContent = "Classical - Easy Level";
+        gamePlayViewDescPara.textContent = "8 guesses, free hint";
+        break;
+      case "Medium":
+        openGamePlayView(6);
+        gamePlayViewTitle.textContent = "Classical - Medium Level";
+        gamePlayViewDescPara.textContent = "6 guesses, free hint";
+        break;
+      case "Difficult":
+        openGamePlayView(5);
+        gamePlayViewTitle.textContent = "Classical - Difficult Level";
+        gamePlayViewDescPara.textContent = "5 guesses, no free hint";
+        break;
     }
   });
 });
@@ -119,14 +123,19 @@ categoryDiv.forEach((category) => {
     chooseCategoryModalSec.style.display = "none";
     gamePlayViewDescPara.textContent = "6 guesses, free hint";
 
-    if (category.textContent === "Animals") {
-      gamePlayViewTitle.textContent = "Category - Animals";
-    } else if (category.textContent === "Sport") {
-      gamePlayViewTitle.textContent = "Category - Sport";
-    } else if (category.textContent === "Birds") {
-      gamePlayViewTitle.textContent = "Category - Birds";
-    } else if (category.textContent === "Countries") {
-      gamePlayViewTitle.textContent = "Category - Countries";
+    switch (category.textContent) {
+      case "Animals":
+        gamePlayViewTitle.textContent = "Category - Animals";
+        break;
+      case "Sport":
+        gamePlayViewTitle.textContent = "Category - Sport";
+        break;
+      case "Birds":
+        gamePlayViewTitle.textContent = "Category - Birds";
+        break;
+      case "Countries":
+        gamePlayViewTitle.textContent = "Category - Countries";
+        break;
     }
   });
 });
