@@ -1,8 +1,6 @@
 const definitionDiv = document.getElementById("definition");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
-const difficultyLvlModalSec = document.getElementById("difficulty-level-modal");
-const chooseCategoryModalSec = document.getElementById("choose-category-modal");
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
 const categoryDiv = document.querySelectorAll(".category");
 
@@ -40,26 +38,26 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
   }
 });
 
-//Open Difficulty Levels (Classical Mode)
+//Open Classical Modal
 document.getElementById("classical-mode").addEventListener("click", () => {
-  difficultyLvlModalSec.style.display = "flex";
+  openModal("difficulty-level-modal");
 });
 
-//Close Difficulty Levels (Classical Mode)
+//Close Classical Modal
 document
   .getElementById("difficulty-lvl-close-btn")
   .addEventListener("click", () => {
-    difficultyLvlModalSec.style.display = "none";
+    closeModal("difficulty-level-modal");
   });
 
 //Open Category Modal
 document.getElementById("category-mode").addEventListener("click", () => {
-  chooseCategoryModalSec.style.display = "flex";
+  openModal("choose-category-modal");
 });
 
 //Close Category Modal
 document.getElementById("category-close-btn").addEventListener("click", () => {
-  chooseCategoryModalSec.style.display = "none";
+  closeModal("choose-category-modal");
 });
 
 // Open the hint btn
@@ -70,7 +68,7 @@ document.getElementById("hint-btn").addEventListener("click", () => {
 // Navigate to GAME PLAY CLASSICAL
 difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
-    difficultyLvlModalSec.style.display = "none";
+    closeModal("difficulty-level-modal");
 
     switch (level.textContent) {
       case "Easy":
@@ -106,7 +104,7 @@ document.getElementById("timed-mode").addEventListener("click", () => {
 categoryDiv.forEach((category) => {
   category.addEventListener("click", () => {
     openGamePlayView(6);
-    chooseCategoryModalSec.style.display = "none";
+    closeModal("choose-category-modal");
     gamePlayViewDescPara.textContent = "6 guesses, free hint";
 
     switch (category.textContent) {
@@ -133,6 +131,14 @@ document.getElementById("learning-mode").addEventListener("click", () => {
   gamePlayViewTitle.textContent = "Learning";
   gamePlayViewDescPara.textContent = "6 guesses, free hint";
 });
+
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
 
 function openGamePlayView(guesses) {
   const homeViewSec = document.getElementById("home-view");
