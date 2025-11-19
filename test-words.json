@@ -1,0 +1,25 @@
+{
+  "modes": {
+    "easy": {
+      "all": ["apple", "chair", "river", "house", "tiger"]
+    },
+    "medium": {
+      "all": ["planet", "garden", "dolphin", "forest", "castle"]
+    },
+    "difficult": {
+      "all": ["elephant", "mountain", "triangle", "notebook", "pharmacy"]
+    },
+    "timed": {
+      "all": ["volcano", "plateau", "rainbow", "penguin", "tornado"]
+    },
+    "learning": {
+      "all": ["pencil", "rabbit", "banana", "flower", "cookie"]
+    }
+  },
+  "categories": {
+    "animals": ["zebra", "otter", "hamster", "falcon", "giraffe"],
+    "gastronomy": ["pizza", "yogurt", "spinach", "muffin", "lasagna"],
+    "geography": ["desert", "island", "canyon", "valley", "ocean"],
+    "hobbies": ["reading", "drawing", "skiing", "fishing", "dancing"]
+  }
+}

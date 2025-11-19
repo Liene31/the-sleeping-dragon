@@ -11,15 +11,6 @@ const qwertyArray = [
   ["Z", "X", "C", "V", "B", "N", "M"],
 ];
 
-// test -> it will be array of API
-//Easy to 5
-//Medium 5 to 7
-//Difficult 7 to 10
-//Timed all ? MAX 10
-//Categories MAX 10
-// Animals, Gastronomy, Geography, Hobbies
-//Learning All MAX 10
-
 const wordLength = 10;
 
 //Toggle hamburger menu
@@ -217,4 +208,21 @@ function drawQwerty() {
   drawQwertyRow(10, 0);
   drawQwertyRow(9, 1);
   drawQwertyRow(7, 2);
+}
+
+function generateRandomNum(length) {
+  return Math.floor(Math.random() * length);
+}
+
+function getWord() {
+  const jsonUrl = "./test-words.json";
+  axios
+    .get(jsonUrl)
+    .then((res) => {
+      const animalsArray = res.data.categories.animals;
+      const randomNum = generateRandomNum(animalsArray.length);
+      const randomWord = animalsArray[randomNum];
+      console.log(randomWord);
+    })
+    .catch((error) => console.error(error.message));
 }
