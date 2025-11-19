@@ -2,7 +2,9 @@ const definitionDiv = document.getElementById("definition");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewDescPara = document.getElementById("game-play-view-desc");
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
+const timedModeDiv = document.getElementById("timed-mode");
 const categoryDiv = document.querySelectorAll(".category");
+const learningModeDiv = document.getElementById("learning-mode");
 
 let isHamburgerMenuClicked = true;
 const qwertyArray = [
@@ -67,68 +69,68 @@ document.getElementById("hint-btn").addEventListener("click", () => {
 // Navigate to GAME PLAY CLASSICAL
 difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
-    const selectedLevel = level.textContent;
-    closeModal("difficulty-level-modal");
+    difficultyLvlModalSec.style.display = "none";
 
-    switch (selectedLevel) {
+    switch (level.textContent) {
       case "Easy":
-        setupGamePlayView({
-          guesses: 8,
-          title: "Classical - Easy Level",
-          desc: "8 guesses, free hint",
-        });
+        openGamePlayView(8);
+        gamePlayViewTitle.textContent = "Classical - Easy Level";
+        gamePlayViewDescPara.textContent = "8 guesses, free hint";
         break;
       case "Medium":
-        setupGamePlayView({
-          guesses: 6,
-          title: "Classical - Medium Level",
-          desc: "6 guesses, free hint",
-        });
+        openGamePlayView(6);
+        gamePlayViewTitle.textContent = "Classical - Medium Level";
+        gamePlayViewDescPara.textContent = "6 guesses, free hint";
         break;
       case "Difficult":
-        setupGamePlayView({
-          guesses: 5,
-          title: "Classical - Difficult Level",
-          desc: "5 guesses, no free hint",
-        });
+        openGamePlayView(5);
+        gamePlayViewTitle.textContent = "Classical - Difficult Level";
+        gamePlayViewDescPara.textContent = "5 guesses, no free hint";
         break;
     }
   });
 });
 
 // Navigate to GAME PLAY TIMED
-document.getElementById("timed-mode").addEventListener("click", () => {
-  setupGamePlayView({
-    guesses: 6,
-    title: "Timed",
-    desc: "6 guesses, free hint",
-    showTimer: true,
-  });
+timedModeDiv.addEventListener("click", () => {
+  const timerContainerDiv = document.getElementById("timer-container");
+  openGamePlayView(6);
+  gamePlayViewTitle.textContent = "Timed";
+  gamePlayViewDescPara.textContent = "6 guesses, free hint";
+  timerContainerDiv.style.display = "flex";
   //add timer
 });
 
 // Navigate to GAME PLAY CATEGORY
 categoryDiv.forEach((category) => {
   category.addEventListener("click", () => {
-    const selectedCategory = category.textContent;
-    closeModal("choose-category-modal");
+    openGamePlayView(6);
+    chooseCategoryModalSec.style.display = "none";
+    gamePlayViewDescPara.textContent = "6 guesses, free hint";
 
-    setupGamePlayView({
-      guesses: 6,
-      title: `Category - ${selectedCategory}`,
-      desc: "6 guesses, free hint",
-    });
+    switch (category.textContent) {
+      case "Animals":
+        gamePlayViewTitle.textContent = "Category - Animals";
+        break;
+      case "Sport":
+        gamePlayViewTitle.textContent = "Category - Sport";
+        break;
+      case "Birds":
+        gamePlayViewTitle.textContent = "Category - Birds";
+        break;
+      case "Countries":
+        gamePlayViewTitle.textContent = "Category - Countries";
+        break;
+    }
   });
 });
 
 // Navigate to GAME PLAY LEARNING
-document.getElementById("learning-mode").addEventListener("click", () => {
-  setupGamePlayView({
-    guesses: 6,
-    title: "Learning",
-    desc: "6 guesses, free hint",
-    showDef: true,
-  });
+learningModeDiv.addEventListener("click", () => {
+  openGamePlayView(6);
+  definitionDiv.style.display = "block";
+  gamePlayViewTitle.textContent = "Learning";
+  gamePlayViewDescPara.textContent = "6 guesses, free hint";
 });
 
 function openModal(id) {
@@ -139,21 +141,21 @@ function closeModal(id) {
   document.getElementById(id).style.display = "none";
 }
 
-function setupGamePlayView({
-  guesses,
-  title,
-  desc,
-  showDef = false,
-  showTimer = false,
-}) {
-  openGamePlayView(guesses);
-  gamePlayViewTitle.textContent = title;
-  gamePlayViewDescPara.textContent = desc;
-  definitionDiv.style.display = showDef ? "block" : "none";
-  document.getElementById("timer-container").style.display = showTimer
-    ? "flex"
-    : "none";
-}
+// function setupGamePlayView({
+//   guesses,
+//   title,
+//   desc,
+//   showDef = false,
+//   showTimer = false,
+// }) {
+//   openGamePlayView(guesses);
+//   gamePlayViewTitle.textContent = title;
+//   gamePlayViewDescPara.textContent = desc;
+//   definitionDiv.style.display = showDef ? "block" : "none";
+//   document.getElementById("timer-container").style.display = showTimer
+//     ? "flex"
+//     : "none";
+// }
 
 function openGamePlayView(guesses) {
   const homeViewSec = document.getElementById("home-view");
