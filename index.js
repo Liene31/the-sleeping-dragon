@@ -71,12 +71,11 @@ function openEasyGamePlayView(word, guesses, category) {
   drawQwerty();
 }
 
-//Loops through the levels
+//Loops through the difficulty levels
 difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
     const levelSelected = level.textContent;
     difficultyLevelModalSection.style.display = "none";
-
     getWord(levelSelected);
   });
 });
@@ -88,7 +87,6 @@ function drawEyeClosed(guess) {
     imgEL.classList.add("eye-closed");
     imgEL.src = "./images/eye-closed.svg";
     imgEL.alt = "icon of eye closed";
-
     dragonEyeDiv.append(imgEL);
   }
 }
@@ -120,27 +118,28 @@ function drawQwertyRow(tile, index) {
 
 function guessWord(letterClicked) {
   const wordToGuess = randomWordEasyWord;
-  console.log(randomWordEasyWord);
-
   const letterArray = [...wordToGuess];
-
   letterClicked = letterClicked.toLowerCase();
-  console.log(letterClicked);
 
   letterArray.forEach((letter, i) => {
     if (letterClicked === letter) {
-      console.log(letter, i);
       guessedLettersArray[i] = letterClicked;
+      changeQwertyTileColor(letterClicked);
     }
   });
 
-  console.log(guessedLettersArray);
   drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
 }
 
 function getPressedLetter(e) {
   letterClicked = e.target.textContent;
+  console.log((e.target.className += " red"));
   guessWord(letterClicked);
+}
+
+function changeQwertyTileColor(letter) {
+  console.log(letter);
+  console.log(qwertyDiv);
 }
 
 qwertyDiv.addEventListener("click", getPressedLetter);

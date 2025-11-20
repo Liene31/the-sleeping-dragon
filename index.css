@@ -270,6 +270,10 @@
           height: 32px;
         }
       }
+
+      .red {
+        background: red;
+      }
     }
   }
 
