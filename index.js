@@ -27,6 +27,9 @@ const qwertyArray = [
 ];
 
 let isHamburgerMenuClicked = true;
+let randomWordEasyWord = "";
+let letterClicked = "";
+const guessedLettersArray = [];
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -78,8 +81,6 @@ difficultyLevelDiv.forEach((level) => {
   });
 });
 
-classicalModeDiv.addEventListener("click", openDifficultyModal);
-
 function drawEyeClosed(guess) {
   const dragonEyeDiv = document.getElementById("dragon-eye");
   for (let i = 0; i < guess; i++) {
@@ -97,7 +98,6 @@ function drawTile(length, targetDiv, array) {
   for (let i = 0; i < length; i++) {
     const div = document.createElement("div");
     div.classList.add("tile");
-    div.textContent = "i";
     if (array) {
       div.textContent = array[i];
     }
@@ -118,33 +118,33 @@ function drawQwertyRow(tile, index) {
   }
 }
 
-function guessWord(word) {
-  const wordToGuess = word;
+function guessWord(letterClicked) {
+  const wordToGuess = randomWordEasyWord;
+  console.log(randomWordEasyWord);
+
   const letterArray = [...wordToGuess];
-  const letterGuessed = "i";
-  const guessedLettersArray = [];
+
+  letterClicked = letterClicked.toLowerCase();
+  console.log(letterClicked);
 
   letterArray.forEach((letter, i) => {
-    if (letterGuessed === letter) {
+    if (letterClicked === letter) {
       console.log(letter, i);
-      return (guessedLettersArray[i] = letterGuessed);
+      guessedLettersArray[i] = letterClicked;
     }
   });
 
   console.log(guessedLettersArray);
-  drawTile(word.length, wordTileDiv, guessedLettersArray);
+  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
 }
 
-//Detect the letter clicked
-qwertyDiv.addEventListener("click", (e) => {
-  const letterClicked = e.target.textContent;
-  letterArray.forEach((letter, index) => {
-    if (letterClicked === letter) {
-      console.log("match " + index);
-    }
-    console.log(letter);
-  });
-});
+function getPressedLetter(e) {
+  letterClicked = e.target.textContent;
+  guessWord(letterClicked);
+}
+
+qwertyDiv.addEventListener("click", getPressedLetter);
+classicalModeDiv.addEventListener("click", openDifficultyModal);
 
 function drawQwerty() {
   drawQwertyRow(10, 0);
@@ -163,11 +163,9 @@ function getWord(category) {
     .then((res) => {
       const easyArray = res.data.modes.easy.all;
       const randomNumEasy = generateRandomNum(easyArray.length);
-      const randomWordEasy = easyArray[randomNumEasy];
-
+      randomWordEasyWord = easyArray[randomNumEasy];
       if (category === "Easy") {
-        openEasyGamePlayView(randomWordEasy, 8, category);
-        guessWord(randomWordEasy);
+        openEasyGamePlayView(randomWordEasyWord, 8, category);
       }
     })
     .catch((error) => console.error(error.message));
