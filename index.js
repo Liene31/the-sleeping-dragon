@@ -18,6 +18,7 @@ const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewPara = document.getElementById("game-play-view-desc");
 
 const wordTileDiv = document.getElementById("word-tile");
+const qwertyDiv = document.getElementById("qwerty");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -55,13 +56,14 @@ function openDifficultyModal() {
   difficultyLevelModalSection.style.display = "flex";
 }
 
-function openEasyGamePlayView(word) {
+//Might need to change for general use
+function openEasyGamePlayView(word, guesses, category) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
-  gamePlayViewTitle.textContent = "Classical - Easy Level";
-  gamePlayViewPara.textContent = `8 guesses, free hint + ${word}`;
+  gamePlayViewTitle.textContent = `Classical - ${category} Level`;
+  gamePlayViewPara.textContent = `${guesses} guesses, free hint + ${word}`;
 
-  drawEyeClosed(8);
+  drawEyeClosed(guesses);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
 }
@@ -91,9 +93,11 @@ function drawEyeClosed(guess) {
 }
 
 function drawTile(length, targetDiv, array) {
+  targetDiv.innerHTML = "";
   for (let i = 0; i < length; i++) {
     const div = document.createElement("div");
     div.classList.add("tile");
+    div.textContent = "i";
     if (array) {
       div.textContent = array[i];
     }
@@ -103,7 +107,6 @@ function drawTile(length, targetDiv, array) {
 }
 
 function drawQwertyRow(tile, index) {
-  const qwertyDiv = document.getElementById("qwerty");
   for (let i = 0; i < 1; i++) {
     const qwertyRowDiv = document.createElement("div");
     qwertyRowDiv.classList.add("qwerty-row");
@@ -114,6 +117,34 @@ function drawQwertyRow(tile, index) {
     }
   }
 }
+
+function guessWord(word) {
+  const wordToGuess = word;
+  const letterArray = [...wordToGuess];
+  const letterGuessed = "i";
+  const guessedLettersArray = [];
+
+  letterArray.forEach((letter, i) => {
+    if (letterGuessed === letter) {
+      console.log(letter, i);
+      return (guessedLettersArray[i] = letterGuessed);
+    }
+  });
+
+  console.log(guessedLettersArray);
+  drawTile(word.length, wordTileDiv, guessedLettersArray);
+}
+
+//Detect the letter clicked
+qwertyDiv.addEventListener("click", (e) => {
+  const letterClicked = e.target.textContent;
+  letterArray.forEach((letter, index) => {
+    if (letterClicked === letter) {
+      console.log("match " + index);
+    }
+    console.log(letter);
+  });
+});
 
 function drawQwerty() {
   drawQwertyRow(10, 0);
@@ -135,8 +166,23 @@ function getWord(category) {
       const randomWordEasy = easyArray[randomNumEasy];
 
       if (category === "Easy") {
-        openEasyGamePlayView(randomWordEasy);
+        openEasyGamePlayView(randomWordEasy, 8, category);
+        guessWord(randomWordEasy);
       }
     })
     .catch((error) => console.error(error.message));
 }
+
+function getDefinition() {
+  const apiKey = "bcb77ca1-ddf7-4968-863e-3b2bc332f3ed";
+  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/learners/json/apple?key=${apiKey}`;
+
+  axios
+    .get(apiUrl)
+    .then((res) => {
+      console.log(res.data[0].shortdef);
+    })
+    .catch((error) => console.error(error.message));
+}
+
+// getDefinition();
