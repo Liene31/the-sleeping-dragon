@@ -200,6 +200,10 @@
     display: flex;
     justify-content: center;
     gap: 0.8rem;
+
+    .eye-closed {
+      width: 26px;
+    }
   }
 
   .timer-container {
@@ -233,6 +237,10 @@
     .tile {
       width: 28px;
       height: 28px;
+      font-family: var(--font-primary);
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: bold;
       border-radius: 0.2rem;
       background-color: var(--color-accent);
       border: 1px solid var(--color-dark-2);
@@ -271,8 +279,8 @@
         }
       }
 
-      .red {
-        background: red;
+      .transparent {
+        background: transparent;
       }
     }
   }

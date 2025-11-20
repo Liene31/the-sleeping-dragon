@@ -20,6 +20,10 @@ const gamePlayViewPara = document.getElementById("game-play-view-desc");
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
 
+const difficultyLvlCloseBtn = document.getElementById(
+  "difficulty-lvl-close-btn"
+);
+
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -59,6 +63,10 @@ function openDifficultyModal() {
   difficultyLevelModalSection.style.display = "flex";
 }
 
+function closeDifficultyLvl() {
+  difficultyLevelModalSection.style.display = "none";
+}
+
 //Might need to change for general use
 function openEasyGamePlayView(word, guesses, category) {
   homeViewSection.style.display = "none";
@@ -82,6 +90,7 @@ difficultyLevelDiv.forEach((level) => {
 
 function drawEyeClosed(guess) {
   const dragonEyeDiv = document.getElementById("dragon-eye");
+  console.log(dragonEyeDiv);
   for (let i = 0; i < guess; i++) {
     const imgEL = document.createElement("img");
     imgEL.classList.add("eye-closed");
@@ -90,6 +99,8 @@ function drawEyeClosed(guess) {
     dragonEyeDiv.append(imgEL);
   }
 }
+
+function drawEyeOpen() {}
 
 function drawTile(length, targetDiv, array) {
   targetDiv.innerHTML = "";
@@ -124,7 +135,8 @@ function guessWord(letterClicked) {
   letterArray.forEach((letter, i) => {
     if (letterClicked === letter) {
       guessedLettersArray[i] = letterClicked;
-      changeQwertyTileColor(letterClicked);
+    } else {
+      //open the eye
     }
   });
 
@@ -133,17 +145,13 @@ function guessWord(letterClicked) {
 
 function getPressedLetter(e) {
   letterClicked = e.target.textContent;
-  console.log((e.target.className += " red"));
+  e.target.className += " transparent";
   guessWord(letterClicked);
-}
-
-function changeQwertyTileColor(letter) {
-  console.log(letter);
-  console.log(qwertyDiv);
 }
 
 qwertyDiv.addEventListener("click", getPressedLetter);
 classicalModeDiv.addEventListener("click", openDifficultyModal);
+difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
 
 function drawQwerty() {
   drawQwertyRow(10, 0);
