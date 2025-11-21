@@ -19,6 +19,7 @@ const gamePlayViewPara = document.getElementById("game-play-view-desc");
 
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
+const dragonEyeDiv = document.getElementById("dragon-eye");
 
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
@@ -33,6 +34,7 @@ const qwertyArray = [
 let isHamburgerMenuClicked = true;
 let randomWordEasyWord = "";
 let letterClicked = "";
+let guess = 6;
 const guessedLettersArray = [];
 
 //Toggle hamburger menu
@@ -68,13 +70,13 @@ function closeDifficultyLvl() {
 }
 
 //Might need to change for general use
-function openEasyGamePlayView(word, guesses, category) {
+function openEasyGamePlayView(word, category) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `Classical - ${category} Level`;
-  gamePlayViewPara.textContent = `${guesses} guesses, free hint + ${word}`;
+  gamePlayViewPara.textContent = `6 guesses, free hint + ${word}`;
 
-  drawEyeClosed(guesses);
+  drawEyes(guess);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
 }
@@ -88,9 +90,49 @@ difficultyLevelDiv.forEach((level) => {
   });
 });
 
-function drawEyeClosed(guess) {
-  const dragonEyeDiv = document.getElementById("dragon-eye");
-  console.log(dragonEyeDiv);
+function guessWord(letterClicked) {
+  const wordToGuess = randomWordEasyWord;
+  const letterArray = [...wordToGuess];
+  letterClicked = letterClicked.toLowerCase();
+  isLetterCorrect = false;
+
+  letterArray.forEach((letter, i) => {
+    if (letterClicked === letter) {
+      isLetterCorrect = true;
+      guessedLettersArray[i] = letterClicked;
+    }
+  });
+
+  if (!isLetterCorrect) {
+    guess--;
+    drawEyes();
+    if (guess <= 0) {
+      gameEnd();
+    }
+  }
+
+  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
+}
+
+function gameEnd() {
+  console.log("you lost");
+}
+
+function getPressedLetter(e) {
+  letterClicked = e.target.textContent;
+  e.target.className += " transparent";
+  guessWord(letterClicked);
+}
+
+function drawEyes() {
+  dragonEyeDiv.innerHTML = "";
+  for (let c = 0; c < 6 - guess; c++) {
+    const imgEL = document.createElement("img");
+    imgEL.classList.add("eye-closed");
+    imgEL.src = "./images/eye-open.svg";
+    imgEL.alt = "icon of eye closed";
+    dragonEyeDiv.append(imgEL);
+  }
   for (let i = 0; i < guess; i++) {
     const imgEL = document.createElement("img");
     imgEL.classList.add("eye-closed");
@@ -99,8 +141,6 @@ function drawEyeClosed(guess) {
     dragonEyeDiv.append(imgEL);
   }
 }
-
-function drawEyeOpen() {}
 
 function drawTile(length, targetDiv, array) {
   targetDiv.innerHTML = "";
@@ -127,32 +167,6 @@ function drawQwertyRow(tile, index) {
   }
 }
 
-function guessWord(letterClicked) {
-  const wordToGuess = randomWordEasyWord;
-  const letterArray = [...wordToGuess];
-  letterClicked = letterClicked.toLowerCase();
-
-  letterArray.forEach((letter, i) => {
-    if (letterClicked === letter) {
-      guessedLettersArray[i] = letterClicked;
-    } else {
-      //open the eye
-    }
-  });
-
-  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
-}
-
-function getPressedLetter(e) {
-  letterClicked = e.target.textContent;
-  e.target.className += " transparent";
-  guessWord(letterClicked);
-}
-
-qwertyDiv.addEventListener("click", getPressedLetter);
-classicalModeDiv.addEventListener("click", openDifficultyModal);
-difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
-
 function drawQwerty() {
   drawQwertyRow(10, 0);
   drawQwertyRow(9, 1);
@@ -172,7 +186,7 @@ function getWord(category) {
       const randomNumEasy = generateRandomNum(easyArray.length);
       randomWordEasyWord = easyArray[randomNumEasy];
       if (category === "Easy") {
-        openEasyGamePlayView(randomWordEasyWord, 8, category);
+        openEasyGamePlayView(randomWordEasyWord, category);
       }
     })
     .catch((error) => console.error(error.message));
@@ -189,5 +203,9 @@ function getDefinition() {
     })
     .catch((error) => console.error(error.message));
 }
+
+qwertyDiv.addEventListener("click", getPressedLetter);
+classicalModeDiv.addEventListener("click", openDifficultyModal);
+difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
 
 // getDefinition();
