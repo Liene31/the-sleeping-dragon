@@ -25,6 +25,8 @@ const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
 
+const playAgainBtn = document.getElementById("play-again-btn");
+
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -103,19 +105,31 @@ function guessWord(letterClicked) {
     }
   });
 
+  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
+
   if (!isLetterCorrect) {
     guess--;
     drawEyes();
     if (guess <= 0) {
-      gameEnd();
+      gameEnd(letterArray);
     }
   }
-
-  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
 }
 
-function gameEnd() {
+function gameEnd(word) {
+  console.log(word);
   console.log("you lost");
+  showGameMessage();
+  playAgainBtn.disabled = false;
+  drawTile(randomWordEasyWord.length, wordTileDiv, word);
+}
+
+function showGameMessage() {
+  dragonEyeDiv.innerHTML = "";
+  const lostGamePara = document.createElement("p");
+  lostGamePara.classList.add("lost-game-text");
+  lostGamePara.textContent = "You Lost";
+  dragonEyeDiv.append(lostGamePara);
 }
 
 function getPressedLetter(e) {
@@ -147,6 +161,7 @@ function drawTile(length, targetDiv, array) {
   for (let i = 0; i < length; i++) {
     const div = document.createElement("div");
     div.classList.add("tile");
+
     if (array) {
       div.textContent = array[i];
     }
