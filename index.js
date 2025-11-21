@@ -134,8 +134,12 @@ function showGameMessage() {
 
 function getPressedLetter(e) {
   letterClicked = e.target.textContent;
-  e.target.className += " transparent";
-  guessWord(letterClicked);
+
+  if (!e.target.classList.contains("transparent")) {
+    e.target.className += " transparent";
+    guessWord(letterClicked);
+    console.log(e.target.className);
+  }
 }
 
 function drawEyes() {
@@ -173,7 +177,7 @@ function drawTile(length, targetDiv, array) {
 function drawQwertyRow(tile, index) {
   for (let i = 0; i < 1; i++) {
     const qwertyRowDiv = document.createElement("div");
-    qwertyRowDiv.classList.add("qwerty-row");
+    qwertyRowDiv.classList.add("qwerty-row", "transparent");
     qwertyDiv.append(qwertyRowDiv);
 
     for (let i = 0; i < 1; i++) {
