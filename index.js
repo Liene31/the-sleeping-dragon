@@ -43,12 +43,17 @@ const qwertyArray = [
 let isHamburgerMenuClicked = true;
 let wordToGuess = "";
 let category = "";
-// let randomWordMediumWord = "";
 let letterClicked = "";
 let guess = 6;
 let scoreWon = 0;
 let scoreLost = 0;
 let guessedLettersArray = [];
+
+qwertyDiv.addEventListener("click", getPressedLetter);
+classicalModeDiv.addEventListener("click", openDifficultyModal);
+difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
+hintBtn.addEventListener("click", getDefinition);
+playAgainBtn.addEventListener("click", restartGame);
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -82,13 +87,6 @@ function closeDifficultyLvl() {
   difficultyLevelModalSection.style.display = "none";
 }
 
-//gameSetup
-
-function gameSetup() {
-  //gameSetup
-}
-
-//Might need to change for general use
 function openGamePlayView(word, category) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
@@ -106,16 +104,12 @@ function openGamePlayView(word, category) {
   drawQwerty();
 }
 
-function openMediumGamePlayView() {
-  //medium
-}
-
 function updateScore() {
   scoreWonSpan.textContent = scoreWon;
   scoreLostSpan.textContent = scoreLost;
 }
 
-//Loops through the difficulty levels
+//Loops through the difficulty levels (Classical Mode)
 difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
     category = level.textContent;
@@ -125,7 +119,6 @@ difficultyLevelDiv.forEach((level) => {
 });
 
 function guessWord(letterClicked) {
-  // const wordToGuess = randomWordEasyWord;
   const letterArray = [...wordToGuess];
   letterClicked = letterClicked.toLowerCase();
   isLetterCorrect = false;
@@ -245,6 +238,13 @@ function generateRandomNum(length) {
   return Math.floor(Math.random() * length);
 }
 
+//Generate Random Word function
+function generateRandomWord(array) {
+  const randomNum = generateRandomNum(array.length);
+  const randomWord = array[randomNum];
+  return randomWord;
+}
+
 function getWord(category) {
   const jsonUrl = "./test-words.json";
   axios
@@ -253,22 +253,16 @@ function getWord(category) {
       const easyArray = res.data.modes.easy.all;
       const mediumArray = res.data.modes.medium.all;
       const difficultArray = res.data.modes.difficult.all;
-      const randomNumEasy = generateRandomNum(easyArray.length);
-      const randomNumMedium = generateRandomNum(mediumArray.length);
-      const randomNumDifficult = generateRandomNum(difficultArray.length);
-      randomWordEasyWord = easyArray[randomNumEasy];
-      randomWordMediumWord = mediumArray[randomNumMedium];
-      randomWordDifficultWord = difficultArray[randomNumDifficult];
 
       if (category === "Easy") {
-        wordToGuess = randomWordEasyWord;
+        wordToGuess = generateRandomWord(easyArray);
         openGamePlayView(wordToGuess, category);
       } else if (category === "Medium") {
-        wordToGuess = randomWordMediumWord;
-        openGamePlayView(randomWordMediumWord, category);
+        wordToGuess = generateRandomWord(mediumArray);
+        openGamePlayView(wordToGuess, category);
       } else if (category === "Difficult") {
-        wordToGuess = randomWordDifficultWord;
-        openGamePlayView(randomWordDifficultWord, category);
+        wordToGuess = generateRandomWord(difficultArray);
+        openGamePlayView(wordToGuess, category);
       }
     })
     .catch((error) => console.error(error.message));
@@ -291,9 +285,3 @@ function restartGame() {
   getWord(category);
   guess = 6;
 }
-
-qwertyDiv.addEventListener("click", getPressedLetter);
-classicalModeDiv.addEventListener("click", openDifficultyModal);
-difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
-hintBtn.addEventListener("click", getDefinition);
-playAgainBtn.addEventListener("click", restartGame);
