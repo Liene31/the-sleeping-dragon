@@ -111,25 +111,32 @@ function guessWord(letterClicked) {
     guess--;
     drawEyes();
     if (guess <= 0) {
-      gameEnd(letterArray);
+      gameEnd(letterArray, "lost");
     }
+  }
+
+  if (guessedLettersArray.toString() === letterArray.toString()) {
+    gameEnd([], "won");
   }
 }
 
-function gameEnd(word) {
-  console.log(word);
-  console.log("you lost");
-  showGameMessage();
+function gameEnd(word, gameOutcome) {
+  qwertyDiv.classList.add("disable-clicks");
   playAgainBtn.disabled = false;
-  drawTile(randomWordEasyWord.length, wordTileDiv, word);
+  if (gameOutcome === "lost") {
+    showGameMessage(gameOutcome);
+    drawTile(randomWordEasyWord.length, wordTileDiv, word);
+  } else {
+    showGameMessage(gameOutcome);
+  }
 }
 
-function showGameMessage() {
+function showGameMessage(gameOutcome) {
   dragonEyeDiv.innerHTML = "";
-  const lostGamePara = document.createElement("p");
-  lostGamePara.classList.add("lost-game-text");
-  lostGamePara.textContent = "You Lost";
-  dragonEyeDiv.append(lostGamePara);
+  const gameOutcomePara = document.createElement("p");
+  gameOutcomePara.classList.add("game-outcome-text");
+  gameOutcomePara.textContent = `You ${gameOutcome}`;
+  dragonEyeDiv.append(gameOutcomePara);
 }
 
 function getPressedLetter(e) {
@@ -138,7 +145,6 @@ function getPressedLetter(e) {
   if (!e.target.classList.contains("transparent")) {
     e.target.className += " transparent";
     guessWord(letterClicked);
-    console.log(e.target.className);
   }
 }
 

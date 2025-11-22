@@ -206,7 +206,7 @@
     }
   }
 
-  .lost-game-text {
+  .game-outcome-text {
     color: var(--color-yellow);
     font-family: var(--font-secondary);
     font-size: 2rem;
@@ -287,11 +287,16 @@
       }
 
       .transparent {
-        background: transparent;
+        background: var(--color-opacity);
+        color: var(--color-accent);
         pointer-events: none;
         cursor: default;
       }
     }
+  }
+
+  .disable-clicks {
+    pointer-events: none;
   }
 
   button {
