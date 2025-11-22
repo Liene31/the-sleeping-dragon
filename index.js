@@ -89,6 +89,8 @@ function openEasyGamePlayView(word, category) {
   qwertyDiv.classList.remove("disable-clicks");
   qwertyDiv.innerHTML = "";
   playAgainBtn.disabled = true;
+  definitionContainerDiv.style.display = "none";
+  definitionPara.textContent = "";
   guessedLettersArray = [];
   updateScore();
   drawEyes(guess);
