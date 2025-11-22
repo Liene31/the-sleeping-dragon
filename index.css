@@ -225,8 +225,17 @@
     }
   }
 
+  .hint {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: flex-start;
+  }
+
   .definition {
     display: none; /*block, none*/
+    max-width: 250px;
+    border: 1px solid var(--color-accent);
     background-color: var(--color-opacity);
     color: var(--color-accent);
     font-family: var(--font-primary);

@@ -17,15 +17,22 @@ const gamePlayViewSection = document.getElementById("game-play-view");
 const gamePlayViewTitle = document.getElementById("game-play-view-title");
 const gamePlayViewPara = document.getElementById("game-play-view-desc");
 
+const definitionContainerDiv = document.getElementById("definition-container");
+const definitionPara = document.getElementById("definition");
+
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
 const dragonEyeDiv = document.getElementById("dragon-eye");
+
+const scoreWonSpan = document.getElementById("score-won");
+const scoreLostSpan = document.getElementById("score-lost");
 
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
 
 const playAgainBtn = document.getElementById("play-again-btn");
+const hintBtn = document.getElementById("hint-btn");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -37,6 +44,8 @@ let isHamburgerMenuClicked = true;
 let randomWordEasyWord = "";
 let letterClicked = "";
 let guess = 6;
+let scoreWon = 0;
+let scoreLost = 0;
 const guessedLettersArray = [];
 
 //Toggle hamburger menu
@@ -77,10 +86,15 @@ function openEasyGamePlayView(word, category) {
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `Classical - ${category} Level`;
   gamePlayViewPara.textContent = `6 guesses, free hint + ${word}`;
-
+  updateScore();
   drawEyes(guess);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
+}
+
+function updateScore() {
+  scoreWonSpan.textContent = scoreWon;
+  scoreLostSpan.textContent = scoreLost;
 }
 
 //Loops through the difficulty levels
@@ -124,9 +138,13 @@ function gameEnd(word, gameOutcome) {
   qwertyDiv.classList.add("disable-clicks");
   playAgainBtn.disabled = false;
   if (gameOutcome === "lost") {
+    scoreLost++;
+    updateScore();
     showGameMessage(gameOutcome);
     drawTile(randomWordEasyWord.length, wordTileDiv, word);
   } else {
+    scoreWon++;
+    updateScore();
     showGameMessage(gameOutcome);
   }
 }
@@ -146,6 +164,13 @@ function getPressedLetter(e) {
     e.target.className += " transparent";
     guessWord(letterClicked);
   }
+}
+
+function revealDefinition(definition) {
+  console.log("clicked");
+  console.log(definition);
+  definitionContainerDiv.style.display = "block";
+  definitionPara.textContent = definition;
 }
 
 function drawEyes() {
@@ -219,12 +244,13 @@ function getWord(category) {
 
 function getDefinition() {
   const apiKey = "bcb77ca1-ddf7-4968-863e-3b2bc332f3ed";
-  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/learners/json/apple?key=${apiKey}`;
+  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/learners/json/${randomWordEasyWord}?key=${apiKey}`;
 
   axios
     .get(apiUrl)
     .then((res) => {
-      console.log(res.data[0].shortdef);
+      const definition = res.data[0].shortdef[0];
+      revealDefinition(definition);
     })
     .catch((error) => console.error(error.message));
 }
@@ -232,5 +258,4 @@ function getDefinition() {
 qwertyDiv.addEventListener("click", getPressedLetter);
 classicalModeDiv.addEventListener("click", openDifficultyModal);
 difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
-
-// getDefinition();
+hintBtn.addEventListener("click", getDefinition);
