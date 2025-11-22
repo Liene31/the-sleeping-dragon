@@ -41,7 +41,9 @@ const qwertyArray = [
 ];
 
 let isHamburgerMenuClicked = true;
-let randomWordEasyWord = "";
+let wordToGuess = "";
+let category = "";
+// let randomWordMediumWord = "";
 let letterClicked = "";
 let guess = 6;
 let scoreWon = 0;
@@ -80,8 +82,14 @@ function closeDifficultyLvl() {
   difficultyLevelModalSection.style.display = "none";
 }
 
+//gameSetup
+
+function gameSetup() {
+  //gameSetup
+}
+
 //Might need to change for general use
-function openEasyGamePlayView(word, category) {
+function openGamePlayView(word, category) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `Classical - ${category} Level`;
@@ -96,7 +104,10 @@ function openEasyGamePlayView(word, category) {
   drawEyes(guess);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
-  console.log(guessedLettersArray);
+}
+
+function openMediumGamePlayView() {
+  //medium
 }
 
 function updateScore() {
@@ -107,14 +118,14 @@ function updateScore() {
 //Loops through the difficulty levels
 difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
-    const levelSelected = level.textContent;
+    category = level.textContent;
     difficultyLevelModalSection.style.display = "none";
-    getWord(levelSelected);
+    getWord(category);
   });
 });
 
 function guessWord(letterClicked) {
-  const wordToGuess = randomWordEasyWord;
+  // const wordToGuess = randomWordEasyWord;
   const letterArray = [...wordToGuess];
   letterClicked = letterClicked.toLowerCase();
   isLetterCorrect = false;
@@ -126,7 +137,7 @@ function guessWord(letterClicked) {
     }
   });
 
-  drawTile(randomWordEasyWord.length, wordTileDiv, guessedLettersArray);
+  drawTile(wordToGuess.length, wordTileDiv, guessedLettersArray);
 
   if (!isLetterCorrect) {
     guess--;
@@ -148,7 +159,7 @@ function gameEnd(word, gameOutcome) {
     scoreLost++;
     updateScore();
     showGameMessage(gameOutcome);
-    drawTile(randomWordEasyWord.length, wordTileDiv, word);
+    drawTile(word.length, wordTileDiv, word);
   } else {
     scoreWon++;
     updateScore();
@@ -240,10 +251,24 @@ function getWord(category) {
     .get(jsonUrl)
     .then((res) => {
       const easyArray = res.data.modes.easy.all;
+      const mediumArray = res.data.modes.medium.all;
+      const difficultArray = res.data.modes.difficult.all;
       const randomNumEasy = generateRandomNum(easyArray.length);
+      const randomNumMedium = generateRandomNum(mediumArray.length);
+      const randomNumDifficult = generateRandomNum(difficultArray.length);
       randomWordEasyWord = easyArray[randomNumEasy];
+      randomWordMediumWord = mediumArray[randomNumMedium];
+      randomWordDifficultWord = difficultArray[randomNumDifficult];
+
       if (category === "Easy") {
-        openEasyGamePlayView(randomWordEasyWord, category);
+        wordToGuess = randomWordEasyWord;
+        openGamePlayView(wordToGuess, category);
+      } else if (category === "Medium") {
+        wordToGuess = randomWordMediumWord;
+        openGamePlayView(randomWordMediumWord, category);
+      } else if (category === "Difficult") {
+        wordToGuess = randomWordDifficultWord;
+        openGamePlayView(randomWordDifficultWord, category);
       }
     })
     .catch((error) => console.error(error.message));
@@ -251,7 +276,7 @@ function getWord(category) {
 
 function getDefinition() {
   const apiKey = "bcb77ca1-ddf7-4968-863e-3b2bc332f3ed";
-  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/learners/json/${randomWordEasyWord}?key=${apiKey}`;
+  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/learners/json/${wordToGuess}?key=${apiKey}`;
 
   axios
     .get(apiUrl)
@@ -263,7 +288,7 @@ function getDefinition() {
 }
 
 function restartGame() {
-  getWord("Easy");
+  getWord(category);
   guess = 6;
 }
 

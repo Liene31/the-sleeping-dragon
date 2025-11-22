@@ -1,7 +1,7 @@
 {
   "modes": {
     "easy": {
-      "all": ["apple", "chair", "river", "house", "pharmacy"]
+      "all": ["apple", "chair", "river", "house", "dog"]
     },
     "medium": {
       "all": ["planet", "garden", "dolphin", "forest", "castle"]
