@@ -46,7 +46,7 @@ let letterClicked = "";
 let guess = 6;
 let scoreWon = 0;
 let scoreLost = 0;
-const guessedLettersArray = [];
+let guessedLettersArray = [];
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -86,10 +86,15 @@ function openEasyGamePlayView(word, category) {
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `Classical - ${category} Level`;
   gamePlayViewPara.textContent = `6 guesses, free hint + ${word}`;
+  qwertyDiv.classList.remove("disable-clicks");
+  qwertyDiv.innerHTML = "";
+  playAgainBtn.disabled = true;
+  guessedLettersArray = [];
   updateScore();
   drawEyes(guess);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
+  console.log(guessedLettersArray);
 }
 
 function updateScore() {
@@ -255,7 +260,13 @@ function getDefinition() {
     .catch((error) => console.error(error.message));
 }
 
+function restartGame() {
+  getWord("Easy");
+  guess = 6;
+}
+
 qwertyDiv.addEventListener("click", getPressedLetter);
 classicalModeDiv.addEventListener("click", openDifficultyModal);
 difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
 hintBtn.addEventListener("click", getDefinition);
+playAgainBtn.addEventListener("click", restartGame);

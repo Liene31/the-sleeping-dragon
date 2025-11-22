@@ -229,7 +229,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    align-self: flex-start;
+
+    button {
+      align-self: flex-start;
+    }
   }
 
   .definition {
