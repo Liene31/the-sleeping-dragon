@@ -105,7 +105,8 @@ function openGamePlayView(word, category, type) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `${category} ${type}`;
-  gamePlayViewPara.textContent = `6 guesses, free hint + ${word}`;
+  gamePlayViewPara.textContent = `6 guesses, free hint`;
+  console.log(`word to guess is ${word}`);
   qwertyDiv.classList.remove("disable-clicks");
   qwertyDiv.innerHTML = "";
   playAgainBtn.disabled = true;
@@ -276,7 +277,7 @@ function generateRandomWord(array) {
 }
 
 function getWord(category) {
-  const jsonUrl = "./test-words.json";
+  const jsonUrl = "./words.json";
   axios
     .get(jsonUrl)
     .then((res) => {
