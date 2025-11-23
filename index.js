@@ -4,6 +4,7 @@ const categoryModeDiv = document.getElementById("category-mode");
 const learningModeDiv = document.getElementById("learning-mode");
 
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
+const chooseCategoryDiv = document.querySelectorAll(".category");
 
 const difficultyLevelModalSection = document.getElementById(
   "difficulty-level-modal"
@@ -30,6 +31,7 @@ const scoreLostSpan = document.getElementById("score-lost");
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
+const categoryCloseBtn = document.getElementById("category-close-btn");
 
 const playAgainBtn = document.getElementById("play-again-btn");
 const hintBtn = document.getElementById("hint-btn");
@@ -51,9 +53,11 @@ let guessedLettersArray = [];
 
 classicalModeDiv.addEventListener("click", openDifficultyModal);
 timedModeDiv.addEventListener("click", triggerTimedMode);
+categoryModeDiv.addEventListener("click", openCategoryModal);
 learningModeDiv.addEventListener("click", triggerLearningMode);
 qwertyDiv.addEventListener("click", getPressedLetter);
 difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
+categoryCloseBtn.addEventListener("click", closeCategoryModal);
 hintBtn.addEventListener("click", getDefinition);
 playAgainBtn.addEventListener("click", restartGame);
 
@@ -85,8 +89,16 @@ function openDifficultyModal() {
   difficultyLevelModalSection.style.display = "flex";
 }
 
+function openCategoryModal() {
+  chooseCategoryModalSection.style.display = "flex";
+}
+
 function closeDifficultyLvl() {
   difficultyLevelModalSection.style.display = "none";
+}
+
+function closeCategoryModal() {
+  chooseCategoryModalSection.style.display = "none";
 }
 
 function openGamePlayView(word, category, type) {
@@ -116,6 +128,15 @@ difficultyLevelDiv.forEach((level) => {
   level.addEventListener("click", () => {
     category = level.textContent;
     difficultyLevelModalSection.style.display = "none";
+    getWord(category);
+  });
+});
+
+//Loops through the categories (Category Mode)
+chooseCategoryDiv.forEach((subject) => {
+  subject.addEventListener("click", () => {
+    category = subject.textContent;
+    chooseCategoryModalSection.style.display = "none";
     getWord(category);
   });
 });
@@ -264,6 +285,10 @@ function getWord(category) {
       const difficultArray = res.data.modes.difficult.all;
       const timedArray = res.data.modes.timed.all;
       const learningArray = res.data.modes.learning.all;
+      const animalsArray = res.data.categories.animals;
+      const gastronomyArray = res.data.categories.gastronomy;
+      const geographyArray = res.data.categories.geography;
+      const hobbiesArray = res.data.categories.hobbies;
 
       if (category === "Easy") {
         wordToGuess = generateRandomWord(easyArray);
@@ -281,6 +306,18 @@ function getWord(category) {
         wordToGuess = generateRandomWord(learningArray);
         openGamePlayView(wordToGuess, category, "Mode");
         console.log("learning");
+      } else if (category === "Animals") {
+        wordToGuess = generateRandomWord(animalsArray);
+        openGamePlayView(wordToGuess, category, "Category");
+      } else if (category === "Gastronomy") {
+        wordToGuess = generateRandomWord(gastronomyArray);
+        openGamePlayView(wordToGuess, category, "Category");
+      } else if (category === "Geography") {
+        wordToGuess = generateRandomWord(geographyArray);
+        openGamePlayView(wordToGuess, category, "Category");
+      } else if (category === "Hobbies") {
+        wordToGuess = generateRandomWord(hobbiesArray);
+        openGamePlayView(wordToGuess, category, "Category");
       }
     })
     .catch((error) => console.error(error.message));
