@@ -49,8 +49,10 @@ let scoreWon = 0;
 let scoreLost = 0;
 let guessedLettersArray = [];
 
-qwertyDiv.addEventListener("click", getPressedLetter);
 classicalModeDiv.addEventListener("click", openDifficultyModal);
+timedModeDiv.addEventListener("click", triggerTimedMode);
+learningModeDiv.addEventListener("click", triggerLearningMode);
+qwertyDiv.addEventListener("click", getPressedLetter);
 difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
 hintBtn.addEventListener("click", getDefinition);
 playAgainBtn.addEventListener("click", restartGame);
@@ -87,10 +89,10 @@ function closeDifficultyLvl() {
   difficultyLevelModalSection.style.display = "none";
 }
 
-function openGamePlayView(word, category) {
+function openGamePlayView(word, category, type) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
-  gamePlayViewTitle.textContent = `Classical - ${category} Level`;
+  gamePlayViewTitle.textContent = `${category} ${type}`;
   gamePlayViewPara.textContent = `6 guesses, free hint + ${word}`;
   qwertyDiv.classList.remove("disable-clicks");
   qwertyDiv.innerHTML = "";
@@ -117,6 +119,16 @@ difficultyLevelDiv.forEach((level) => {
     getWord(category);
   });
 });
+
+function triggerTimedMode() {
+  category = "Timed";
+  getWord(category);
+}
+
+function triggerLearningMode() {
+  category = "Learning";
+  getWord(category);
+}
 
 function guessWord(letterClicked) {
   const letterArray = [...wordToGuess];
@@ -178,8 +190,6 @@ function getPressedLetter(e) {
 }
 
 function revealDefinition(definition) {
-  console.log("clicked");
-  console.log(definition);
   definitionContainerDiv.style.display = "block";
   definitionPara.textContent = definition;
 }
@@ -238,7 +248,6 @@ function generateRandomNum(length) {
   return Math.floor(Math.random() * length);
 }
 
-//Generate Random Word function
 function generateRandomWord(array) {
   const randomNum = generateRandomNum(array.length);
   const randomWord = array[randomNum];
@@ -253,16 +262,25 @@ function getWord(category) {
       const easyArray = res.data.modes.easy.all;
       const mediumArray = res.data.modes.medium.all;
       const difficultArray = res.data.modes.difficult.all;
+      const timedArray = res.data.modes.timed.all;
+      const learningArray = res.data.modes.learning.all;
 
       if (category === "Easy") {
         wordToGuess = generateRandomWord(easyArray);
-        openGamePlayView(wordToGuess, category);
+        openGamePlayView(wordToGuess, category, "Level");
       } else if (category === "Medium") {
         wordToGuess = generateRandomWord(mediumArray);
-        openGamePlayView(wordToGuess, category);
+        openGamePlayView(wordToGuess, category, "Level");
       } else if (category === "Difficult") {
         wordToGuess = generateRandomWord(difficultArray);
-        openGamePlayView(wordToGuess, category);
+        openGamePlayView(wordToGuess, category, "Level");
+      } else if (category === "Timed") {
+        wordToGuess = generateRandomWord(timedArray);
+        openGamePlayView(wordToGuess, category, "Mode");
+      } else if (category === "Learning") {
+        wordToGuess = generateRandomWord(learningArray);
+        openGamePlayView(wordToGuess, category, "Mode");
+        console.log("learning");
       }
     })
     .catch((error) => console.error(error.message));
