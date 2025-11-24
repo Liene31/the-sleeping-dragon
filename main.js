@@ -52,17 +52,23 @@ let scoreWon = 0;
 let scoreLost = 0;
 let guessedLettersArray = [];
 
-classicalModeDiv.addEventListener("click", openDifficultyModal);
-timedModeDiv.addEventListener("click", triggerTimedMode);
-categoryModeDiv.addEventListener("click", openCategoryModal);
-learningModeDiv.addEventListener("click", triggerLearningMode);
-qwertyDiv.addEventListener("click", getPressedLetter);
-difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
-categoryCloseBtn.addEventListener("click", closeCategoryModal);
-hintBtn.addEventListener("click", getDefinition);
-playAgainBtn.addEventListener("click", restartGame);
-//Test function
-homeBtn.addEventListener("click", saveScore);
+checkIfElExists(classicalModeDiv, "click", openDifficultyModal);
+checkIfElExists(timedModeDiv, "click", triggerTimedMode);
+checkIfElExists(categoryModeDiv, "click", openCategoryModal);
+checkIfElExists(learningModeDiv, "click", triggerLearningMode);
+checkIfElExists(qwertyDiv, "click", getPressedLetter);
+checkIfElExists(difficultyLvlCloseBtn, "click", closeDifficultyLvl);
+checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
+checkIfElExists(hintBtn, "click", getDefinition);
+checkIfElExists(playAgainBtn, "click", restartGame);
+checkIfElExists(homeBtn, "click", saveScore);
+
+//Check if the element exists on the page
+function checkIfElExists(selector, event, handler) {
+  if (selector) {
+    selector.addEventListener(event, handler);
+  }
+}
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -310,7 +316,6 @@ function getWord(category) {
       } else if (category === "Learning") {
         wordToGuess = generateRandomWord(learningArray);
         openGamePlayView(wordToGuess, category, "Mode");
-        console.log("learning");
       } else if (category === "Animals") {
         wordToGuess = generateRandomWord(animalsArray);
         openGamePlayView(wordToGuess, category, "Category");
