@@ -351,17 +351,33 @@ function restartGame() {
   guess = 6;
 }
 
-let wonScoreArray = [];
-const savedWonScore = JSON.parse(localStorage.getItem("wonScore"));
+let easyWonScoreArray = [];
+const savedWonScore = JSON.parse(localStorage.getItem("easyWonScore"));
 console.log(savedWonScore);
 
 if (savedWonScore) {
-  wonScoreArray = savedWonScore;
+  easyWonScoreArray = savedWonScore;
 }
 
 function saveScore() {
-  wonScoreArray.push(scoreWon);
-  localStorage.setItem("wonScore", JSON.stringify(wonScoreArray));
+  if (category === "Easy" && scoreWon > 0) {
+    easyWonScoreArray.push(scoreWon);
+    localStorage.setItem("easyWonScore", JSON.stringify(easyWonScoreArray));
+  }
+}
+
+///--------------------------
+
+const scoreEasyWonTd = document.getElementById("score-easy-won");
+const initialValue = 0;
+const sum = easyWonScoreArray.reduce(
+  (acc, currentValue) => acc + currentValue,
+  0
+);
+
+//Checks if the element exists in the page
+if (scoreEasyWonTd) {
+  scoreEasyWonTd.textContent = sum;
 }
 
 // localStorage.clear();

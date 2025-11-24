@@ -1,12 +1,10 @@
 .score-container {
   width: 100%;
-  margin: 0 auto;
+  margin: 5rem auto;
   background: var(--color-opacity);
   padding: 1.5rem 2rem;
   border-radius: 0.5rem;
   max-width: 640px;
-  /*Check how to better center in the middle*/
-  margin-top: 5rem;
 
   h1 {
     text-align: center;
@@ -35,7 +33,7 @@ table.score-table {
 
   th,
   td {
-    padding: 0.6rem 0.85rem;
+    padding: 0.8rem 0.85rem;
   }
 
   th {
