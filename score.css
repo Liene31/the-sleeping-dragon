@@ -1,54 +1,64 @@
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+.score-container {
+  width: 100%;
+  margin: 0 auto;
+  background: var(--color-opacity);
+  padding: 1.5rem 2rem;
+  border-radius: 0.5rem;
+  max-width: 640px;
+  /*Check how to better center in the middle*/
+  margin-top: 5rem;
+
+  h1 {
+    text-align: center;
+    font-family: var(--font-secondary);
+    color: var(--color-yellow);
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
 }
 
-h1 {
-  font-family: var(--font-secondary);
-  font-size: 2rem;
-  color: var(--color-yellow);
+.score-table-container {
+  border-radius: 0.5rem;
+  overflow: hidden; /* keeps corners rounded */
 }
 
-table {
-  width: 500px;
+table.score-table {
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid var(--color-yellow);
-  font-family: sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-}
-
-thead,
-tfoot {
-  background-color: var(--color-yellow);
-  font-family: var(--font-primary);
-  text-transform: uppercase;
-}
-
-th,
-td {
-  border: 1px solid var(--color-accent);
-  padding: 8px 10px;
-  font-family: var(--font-primary);
   text-align: center;
+  font-size: 1rem;
+
+  thead tr {
+    background: var(--color-yellow);
+    color: var(--color-bg-dark);
+  }
+
+  th,
+  td {
+    padding: 0.6rem 0.85rem;
+  }
+
+  th {
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
+    font-size: 0.9rem;
+  }
+
+  /* Body rows: zebra stripes */
+  tbody tr:nth-child(odd) {
+    background: var(--color-dark-1);
+    color: var(--color-bg-dark);
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--color-dark-3);
+    color: var(--color-bg-dark);
+  }
 }
 
-tbody > tr:nth-of-type(even) {
-  background-color: var(--color-dark-1);
-  color: var(--color-accent);
-}
-
-tbody > tr:nth-of-type(odd) {
-  background-color: var(--color-dark-3);
-  color: var(--color-accent);
-}
-
-tfoot th {
-  text-align: right;
-}
-
-tfoot td {
-  font-weight: bold;
+/* Totals row */
+table.score-table tfoot tr {
+  background: var(--color-yellow);
+  color: var(--color-bg-dark);
+  font-weight: 700;
 }
