@@ -1,0 +1,54 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+h1 {
+  font-family: var(--font-secondary);
+  font-size: 2rem;
+  color: var(--color-yellow);
+}
+
+table {
+  width: 500px;
+  border-collapse: collapse;
+  border: 2px solid var(--color-yellow);
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+thead,
+tfoot {
+  background-color: var(--color-yellow);
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+}
+
+th,
+td {
+  border: 1px solid var(--color-accent);
+  padding: 8px 10px;
+  font-family: var(--font-primary);
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: var(--color-dark-1);
+  color: var(--color-accent);
+}
+
+tbody > tr:nth-of-type(odd) {
+  background-color: var(--color-dark-3);
+  color: var(--color-accent);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
+}

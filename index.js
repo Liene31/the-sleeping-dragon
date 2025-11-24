@@ -35,6 +35,7 @@ const categoryCloseBtn = document.getElementById("category-close-btn");
 
 const playAgainBtn = document.getElementById("play-again-btn");
 const hintBtn = document.getElementById("hint-btn");
+const homeBtn = document.getElementById("home-btn");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -60,6 +61,8 @@ difficultyLvlCloseBtn.addEventListener("click", closeDifficultyLvl);
 categoryCloseBtn.addEventListener("click", closeCategoryModal);
 hintBtn.addEventListener("click", getDefinition);
 playAgainBtn.addEventListener("click", restartGame);
+//Test function
+homeBtn.addEventListener("click", saveScore);
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -272,6 +275,7 @@ function generateRandomNum(length) {
 
 function generateRandomWord(array) {
   const randomNum = generateRandomNum(array.length);
+  console.log(array.length);
   const randomWord = array[randomNum];
   return randomWord;
 }
@@ -341,3 +345,18 @@ function restartGame() {
   getWord(category);
   guess = 6;
 }
+
+let wonScoreArray = [];
+const savedWonScore = JSON.parse(localStorage.getItem("wonScore"));
+console.log(savedWonScore);
+
+if (savedWonScore) {
+  wonScoreArray = savedWonScore;
+}
+
+function saveScore() {
+  wonScoreArray.push(scoreWon);
+  localStorage.setItem("wonScore", JSON.stringify(wonScoreArray));
+}
+
+// localStorage.clear();
