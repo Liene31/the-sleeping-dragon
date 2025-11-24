@@ -351,33 +351,55 @@ function restartGame() {
   guess = 6;
 }
 
-let easyWonScoreArray = [];
-const savedWonScore = JSON.parse(localStorage.getItem("easyWonScore"));
-console.log(savedWonScore);
+const scoreEasyWonTd = document.getElementById("score-easy-won");
+const scoreEasyLostTd = document.getElementById("score-easy-lost");
 
-if (savedWonScore) {
-  easyWonScoreArray = savedWonScore;
+let easyWonScoreArray = [];
+let easyLostScoreArray = [];
+
+const savedEasyWonScore = JSON.parse(localStorage.getItem("easyWonScore"));
+const savedEasyLostScore = JSON.parse(localStorage.getItem("easyLostScore"));
+
+console.log(savedEasyWonScore);
+
+if (savedEasyWonScore) {
+  easyWonScoreArray = savedEasyWonScore;
+}
+
+if (savedEasyLostScore) {
+  easyLostScoreArray = savedEasyLostScore;
 }
 
 function saveScore() {
   if (category === "Easy" && scoreWon > 0) {
     easyWonScoreArray.push(scoreWon);
     localStorage.setItem("easyWonScore", JSON.stringify(easyWonScoreArray));
+  } else if (category === "Easy" && scoreLost > 0) {
+    easyLostScoreArray.push(scoreLost);
+    localStorage.setItem("easyLostScore", JSON.stringify(easyLostScoreArray));
   }
 }
 
-///--------------------------
+const sumEasyWon = easyWonScoreArray.reduce(
+  (acc, currentValue) => acc + currentValue,
+  0
+);
 
-const scoreEasyWonTd = document.getElementById("score-easy-won");
-const initialValue = 0;
-const sum = easyWonScoreArray.reduce(
+const sumEasyLost = easyLostScoreArray.reduce(
   (acc, currentValue) => acc + currentValue,
   0
 );
 
 //Checks if the element exists in the page
 if (scoreEasyWonTd) {
-  scoreEasyWonTd.textContent = sum;
+  scoreEasyWonTd.textContent = sumEasyWon;
 }
+
+if (scoreEasyLostTd) {
+  scoreEasyLostTd.textContent = sumEasyLost;
+}
+
+const td = document.querySelectorAll("td");
+console.log(td);
 
 // localStorage.clear();
