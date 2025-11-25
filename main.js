@@ -382,7 +382,7 @@ function saveScore() {
 const scoreEasyWonTd = document.getElementById("score-easy-won");
 const scoreEasyLostTd = document.getElementById("score-easy-lost");
 
-console.log(savedScores.easy.won);
+// console.log(savedScores.easy.won);
 
 const sumEasyWon = savedScores.easy.won.reduce(
   (acc, currentValue) => acc + currentValue,
@@ -403,4 +403,49 @@ if (scoreEasyLostTd) {
   scoreEasyLostTd.textContent = sumEasyLost;
 }
 
+const scoreTableDiv = document.getElementById("score-table");
+let tableBodyHtml = "";
+
+// console.log(savedScores);
+
+for (const categoryName in savedScores) {
+  const category = savedScores[categoryName];
+  console.log(category);
+
+  tableBodyHtml += `
+            
+              
+                <tr>
+                  <th scope="row">${categoryName}</th>
+                  <td id=score-${categoryName}-won>${category.won}</td>
+                  <td id="score-easy-lost">${category.lost}</td>
+                </tr>
+                          
+            
+`;
+}
+
+let tableHtml = `
+          <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">🏆 Won</th>
+                <th scope="col">⚔️ Lost</th>
+              </tr>
+            </thead>
+            <tbody>
+${tableBodyHtml}
+</tbody>  
+            <tfoot>
+              <tr>
+                <th scope="row">Total</th>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </tfoot>
+`;
+
+scoreTableDiv.innerHTML = tableHtml;
+
+console.log(tableHtml);
 // localStorage.clear();
