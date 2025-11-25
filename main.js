@@ -61,6 +61,7 @@ checkIfElExists(difficultyLvlCloseBtn, "click", closeDifficultyLvl);
 checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
 checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
+checkIfElExists(homeBtn, "click", saveScore);
 
 //Check if the element exists on the page
 function checkIfElExists(selector, event, handler) {
@@ -363,35 +364,63 @@ const defaultScore = {
     won: [],
     lost: [],
   },
+  timed: {
+    won: [],
+    lost: [],
+  },
+  learning: {
+    won: [],
+    lost: [],
+  },
+  animals: {
+    won: [],
+    lost: [],
+  },
+  gastronomy: {
+    won: [],
+    lost: [],
+  },
+  geography: {
+    won: [],
+    lost: [],
+  },
+  hobbies: {
+    won: [],
+    lost: [],
+  },
 };
 
 const savedScores =
   JSON.parse(localStorage.getItem("savedScores")) || defaultScore;
 
 //Save the score to localStorage when navigate away from the page gamePlay view
-const beforeUnloadListener = () => {
-  if (category === "Easy" && scoreWon > 0) {
-    savedScores.easy.won.push(scoreWon);
-  }
-  if (category === "Easy" && scoreLost > 0) {
-    savedScores.easy.lost.push(scoreLost);
-  }
-  if (category === "Medium" && scoreWon > 0) {
-    savedScores.medium.won.push(scoreWon);
-  }
-  if (category === "Medium" && scoreLost > 0) {
-    savedScores.medium.lost.push(scoreLost);
-  }
-  localStorage.setItem("savedScores", JSON.stringify(savedScores));
-};
+function saveScore() {
+  const mapCategory = {
+    Easy: "easy",
+    Medium: "medium",
+    Difficult: "hard",
+    Learning: "learning",
+    Animals: "animals",
+    Gastronomy: "gastronomy",
+    Geography: "geography",
+    Hobbies: "hobbies",
+  };
+  const key = mapCategory[category];
 
-window.addEventListener("beforeunload", beforeUnloadListener);
+  if (scoreWon > 0) {
+    savedScores[key].won.push(scoreWon);
+  }
+  if (scoreLost > 0) {
+    savedScores[key].lost.push(scoreLost);
+  }
+
+  localStorage.setItem("savedScores", JSON.stringify(savedScores));
+}
+
+// window.addEventListener("beforeunload", beforeUnloadListener);
 
 function getSum(scoreArray) {
-  return (sumEasyLost = scoreArray.reduce(
-    (acc, currentValue) => acc + currentValue,
-    0
-  ));
+  return scoreArray.reduce((acc, currentValue) => acc + currentValue, 0);
 }
 
 const tableBody = document.getElementById("table-body");
