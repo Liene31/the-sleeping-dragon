@@ -351,41 +351,45 @@ function restartGame() {
   guess = 6;
 }
 
-const scoreEasyWonTd = document.getElementById("score-easy-won");
-const scoreEasyLostTd = document.getElementById("score-easy-lost");
+const defaultScore = {
+  easy: {
+    won: [],
+    lost: [],
+  },
+  medium: {
+    won: [],
+    lost: [],
+  },
+  hard: {
+    won: [],
+    lost: [],
+  },
+};
 
-let easyWonScoreArray = [];
-let easyLostScoreArray = [];
-
-const savedEasyWonScore = JSON.parse(localStorage.getItem("easyWonScore"));
-const savedEasyLostScore = JSON.parse(localStorage.getItem("easyLostScore"));
-
-console.log(savedEasyWonScore);
-
-if (savedEasyWonScore) {
-  easyWonScoreArray = savedEasyWonScore;
-}
-
-if (savedEasyLostScore) {
-  easyLostScoreArray = savedEasyLostScore;
-}
+const savedScores =
+  JSON.parse(localStorage.getItem("savedScores")) || defaultScore;
 
 function saveScore() {
   if (category === "Easy" && scoreWon > 0) {
-    easyWonScoreArray.push(scoreWon);
-    localStorage.setItem("easyWonScore", JSON.stringify(easyWonScoreArray));
-  } else if (category === "Easy" && scoreLost > 0) {
-    easyLostScoreArray.push(scoreLost);
-    localStorage.setItem("easyLostScore", JSON.stringify(easyLostScoreArray));
+    savedScores.easy.won.push(scoreWon);
   }
+  if (category === "Easy" && scoreLost > 0) {
+    savedScores.easy.lost.push(scoreLost);
+  }
+  localStorage.setItem("savedScores", JSON.stringify(savedScores));
 }
 
-const sumEasyWon = easyWonScoreArray.reduce(
+const scoreEasyWonTd = document.getElementById("score-easy-won");
+const scoreEasyLostTd = document.getElementById("score-easy-lost");
+
+console.log(savedScores.easy.won);
+
+const sumEasyWon = savedScores.easy.won.reduce(
   (acc, currentValue) => acc + currentValue,
   0
 );
 
-const sumEasyLost = easyLostScoreArray.reduce(
+const sumEasyLost = savedScores.easy.lost.reduce(
   (acc, currentValue) => acc + currentValue,
   0
 );
@@ -398,8 +402,5 @@ if (scoreEasyWonTd) {
 if (scoreEasyLostTd) {
   scoreEasyLostTd.textContent = sumEasyLost;
 }
-
-const td = document.querySelectorAll("td");
-console.log(td);
 
 // localStorage.clear();
