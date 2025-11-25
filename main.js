@@ -399,6 +399,7 @@ function saveScore() {
     Easy: "easy",
     Medium: "medium",
     Difficult: "hard",
+    Timed: "timed",
     Learning: "learning",
     Animals: "animals",
     Gastronomy: "gastronomy",
