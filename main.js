@@ -61,7 +61,6 @@ checkIfElExists(difficultyLvlCloseBtn, "click", closeDifficultyLvl);
 checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
 checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
-checkIfElExists(homeBtn, "click", saveScore);
 
 //Check if the element exists on the page
 function checkIfElExists(selector, event, handler) {
@@ -369,83 +368,57 @@ const defaultScore = {
 const savedScores =
   JSON.parse(localStorage.getItem("savedScores")) || defaultScore;
 
-function saveScore() {
+//Save the score to localStorage when navigate away from the page gamePlay view
+const beforeUnloadListener = () => {
   if (category === "Easy" && scoreWon > 0) {
     savedScores.easy.won.push(scoreWon);
   }
   if (category === "Easy" && scoreLost > 0) {
     savedScores.easy.lost.push(scoreLost);
   }
+  if (category === "Medium" && scoreWon > 0) {
+    savedScores.medium.won.push(scoreWon);
+  }
+  if (category === "Medium" && scoreLost > 0) {
+    savedScores.medium.lost.push(scoreLost);
+  }
   localStorage.setItem("savedScores", JSON.stringify(savedScores));
+};
+
+window.addEventListener("beforeunload", beforeUnloadListener);
+
+function getSum(scoreArray) {
+  return (sumEasyLost = scoreArray.reduce(
+    (acc, currentValue) => acc + currentValue,
+    0
+  ));
 }
 
-const scoreEasyWonTd = document.getElementById("score-easy-won");
-const scoreEasyLostTd = document.getElementById("score-easy-lost");
+const tableBody = document.getElementById("table-body");
 
-// console.log(savedScores.easy.won);
-
-const sumEasyWon = savedScores.easy.won.reduce(
-  (acc, currentValue) => acc + currentValue,
-  0
-);
-
-const sumEasyLost = savedScores.easy.lost.reduce(
-  (acc, currentValue) => acc + currentValue,
-  0
-);
-
-//Checks if the element exists in the page
-if (scoreEasyWonTd) {
-  scoreEasyWonTd.textContent = sumEasyWon;
-}
-
-if (scoreEasyLostTd) {
-  scoreEasyLostTd.textContent = sumEasyLost;
-}
-
-const scoreTableDiv = document.getElementById("score-table");
-let tableBodyHtml = "";
-
-// console.log(savedScores);
-
+//Creates the tbody tr, th, td and push in the scores from localStorage
 for (const categoryName in savedScores) {
   const category = savedScores[categoryName];
-  console.log(category);
+  const wonArray = category.won;
+  const wonSum = getSum(wonArray);
+  const lostArray = category.lost;
+  const lostSum = getSum(lostArray);
 
-  tableBodyHtml += `
-            
-              
-                <tr>
-                  <th scope="row">${categoryName}</th>
-                  <td id=score-${categoryName}-won>${category.won}</td>
-                  <td id="score-easy-lost">${category.lost}</td>
-                </tr>
-                          
-            
-`;
+  const tableRow = document.createElement("tr");
+  const tableHeader = document.createElement("th");
+  const tableDataWon = document.createElement("td");
+  const tableDataLost = document.createElement("td");
+
+  tableHeader.setAttribute("scope", "row");
+  tableHeader.textContent = `${categoryName}`;
+  tableDataWon.textContent = `${wonSum}`;
+  tableDataLost.textContent = `${lostSum}`;
+
+  tableRow.append(tableHeader, tableDataWon, tableDataLost);
+  //Checks if the element exists in the page
+  if (tableBody) {
+    tableBody.append(tableRow);
+  }
 }
 
-let tableHtml = `
-          <thead>
-              <tr>
-                <th scope="col">Category</th>
-                <th scope="col">🏆 Won</th>
-                <th scope="col">⚔️ Lost</th>
-              </tr>
-            </thead>
-            <tbody>
-${tableBodyHtml}
-</tbody>  
-            <tfoot>
-              <tr>
-                <th scope="row">Total</th>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-            </tfoot>
-`;
-
-scoreTableDiv.innerHTML = tableHtml;
-
-console.log(tableHtml);
 // localStorage.clear();
