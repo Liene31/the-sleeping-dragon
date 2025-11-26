@@ -64,16 +64,16 @@ checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
 checkIfElExists(homeBtn, "click", saveScore);
 
-siteThemeBtn.forEach((theme) => {
-  theme.addEventListener("click", changeTheme);
-});
-
 //Check if the element exists on the page
 function checkIfElExists(selector, event, handler) {
   if (selector) {
     selector.addEventListener(event, handler);
   }
 }
+
+siteThemeBtn.forEach((theme) => {
+  theme.addEventListener("click", changeTheme);
+});
 
 //Toggle hamburger menu
 document.getElementById("hamburger-menu").addEventListener("click", () => {
@@ -99,17 +99,32 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
   }
 });
 
+let isThemeClicked = true;
 //Change the Theme of the WebSite
 function changeTheme() {
   const root = document.documentElement;
-  root.style.setProperty("--color-bg-dark", "#707378");
-  root.style.setProperty("--color-dark-1", "#2B2B2E");
-  root.style.setProperty("--color-dark-2", "#1E1E20");
-  root.style.setProperty("--color-dark-3", "#3A3A3E");
-  root.style.setProperty("--color-opacity", "rgb(15,15,17, 0.7)");
-  root.style.setProperty("--color-yellow", "#E0B548");
-  root.style.setProperty("--color-accent", "#FFF9EE");
-  root.style.setProperty("--bg-image", "url(./images/dragon-grey-bg.jpg)");
+
+  if (isThemeClicked) {
+    isThemeClicked = false;
+    root.style.setProperty("--color-bg-dark", "#707378");
+    root.style.setProperty("--color-dark-1", "#2B2B2E");
+    root.style.setProperty("--color-dark-2", "#1E1E20");
+    root.style.setProperty("--color-dark-3", "#3A3A3E");
+    root.style.setProperty("--color-opacity", "rgb(15,15,17, 0.7)");
+    root.style.setProperty("--color-yellow", "#E0B548");
+    root.style.setProperty("--color-accent", "#FFF9EE");
+    root.style.setProperty("--bg-image", "url(./images/dragon-grey-bg.jpg)");
+  } else {
+    isThemeClicked = true;
+    root.style.setProperty("--color-bg-dark", "#1d0e09");
+    root.style.setProperty("--color-dark-1", "#3c342e");
+    root.style.setProperty("--color-dark-2", "#302924");
+    root.style.setProperty("--color-dark-3", "#4e4842");
+    root.style.setProperty("--color-opacity", "rgba(26, 12, 9, 0.7)");
+    root.style.setProperty("--color-yellow", "#eeb84c");
+    root.style.setProperty("--color-accent", "#ebdbab");
+    root.style.setProperty("--bg-image", "url(./images/dragon-bg.jpg)");
+  }
 }
 
 function openDifficultyModal() {

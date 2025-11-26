@@ -1,10 +1,8 @@
 main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: var(--font-primary);
   color: var(--color-yellow);
   padding: 2rem 1rem;
+  /* background-size: auto; */
 }
 
 .container {
@@ -56,12 +54,13 @@ h3 {
   }
 }
 
+/*--------------------------------------*/
+
 .rules-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   margin-top: 1rem;
-
   > div {
     border-radius: 0.75rem;
     padding: 1.25rem 1.25rem 1rem;
@@ -69,7 +68,6 @@ h3 {
     position: relative;
   }
 
-  /* Little glowing accent line at top of each card */
   > div::before {
     content: "";
     position: absolute;

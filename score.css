@@ -1,7 +1,4 @@
 main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: var(--font-primary);
   color: var(--color-yellow);
   padding: 2rem 1rem;
