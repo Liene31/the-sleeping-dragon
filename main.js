@@ -36,6 +36,7 @@ const categoryCloseBtn = document.getElementById("category-close-btn");
 const playAgainBtn = document.getElementById("play-again-btn");
 const hintBtn = document.getElementById("hint-btn");
 const homeBtn = document.getElementById("home-btn");
+const siteThemeBtn = document.querySelectorAll(".theme");
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -62,6 +63,10 @@ checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
 checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
 checkIfElExists(homeBtn, "click", saveScore);
+
+siteThemeBtn.forEach((theme) => {
+  theme.addEventListener("click", changeTheme);
+});
 
 //Check if the element exists on the page
 function checkIfElExists(selector, event, handler) {
@@ -93,6 +98,19 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
     }
   }
 });
+
+//Change the Theme of the WebSite
+function changeTheme() {
+  const root = document.documentElement;
+  root.style.setProperty("--color-bg-dark", "#707378");
+  root.style.setProperty("--color-dark-1", "#2B2B2E");
+  root.style.setProperty("--color-dark-2", "#1E1E20");
+  root.style.setProperty("--color-dark-3", "#3A3A3E");
+  root.style.setProperty("--color-opacity", "rgb(15,15,17, 0.7)");
+  root.style.setProperty("--color-yellow", "#E0B548");
+  root.style.setProperty("--color-accent", "#FFF9EE");
+  root.style.setProperty("--bg-image", "url(./images/dragon-grey-bg.jpg)");
+}
 
 function openDifficultyModal() {
   difficultyLevelModalSection.style.display = "flex";
