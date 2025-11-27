@@ -265,7 +265,7 @@ function revealDefinition(definition) {
 }
 
 function displayTimer() {
-  let sec = 45;
+  let sec = 35;
   timer = setInterval(() => {
     sec < 10
       ? (timerSpan.textContent = `00:0${sec}`)
