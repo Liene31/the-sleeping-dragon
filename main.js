@@ -21,6 +21,9 @@ const gamePlayViewPara = document.getElementById("game-play-view-desc");
 const definitionContainerDiv = document.getElementById("definition-container");
 const definitionPara = document.getElementById("definition");
 
+const timerContainerDiv = document.getElementById("timer-container");
+const timerSpan = document.getElementById("timer");
+
 const wordTileDiv = document.getElementById("word-tile");
 const qwertyDiv = document.getElementById("qwerty");
 const dragonEyeDiv = document.getElementById("dragon-eye");
@@ -48,6 +51,7 @@ let isHamburgerMenuClicked = true;
 let wordToGuess = "";
 let category = "";
 let letterClicked = "";
+let timer;
 let guess = 6;
 let scoreWon = 0;
 let scoreLost = 0;
@@ -159,11 +163,11 @@ function openGamePlayView(word, category, type) {
   drawEyes(guess);
   drawTile(word.length, wordTileDiv);
   drawQwerty();
-}
 
-function updateScore() {
-  scoreWonSpan.textContent = scoreWon;
-  scoreLostSpan.textContent = scoreLost;
+  if (category === "Timed") {
+    displayTimer();
+    timerContainerDiv.style.display = "flex";
+  }
 }
 
 //Loops through the difficulty levels (Classical Mode)
@@ -212,12 +216,14 @@ function guessWord(letterClicked) {
     guess--;
     drawEyes();
     if (guess <= 0) {
+      clearInterval(timer);
       gameEnd(letterArray, "lost");
     }
   }
 
   if (guessedLettersArray.toString() === letterArray.toString()) {
     gameEnd([], "won");
+    clearInterval(timer);
   }
 }
 
@@ -256,6 +262,25 @@ function getPressedLetter(e) {
 function revealDefinition(definition) {
   definitionContainerDiv.style.display = "block";
   definitionPara.textContent = definition;
+}
+
+function displayTimer() {
+  let sec = 45;
+  timer = setInterval(() => {
+    sec < 10
+      ? (timerSpan.textContent = `00:0${sec}`)
+      : (timerSpan.textContent = `00:${sec}`);
+    sec--;
+    if (sec < 0) {
+      clearInterval(timer);
+      gameEnd([...wordToGuess], "lost");
+    }
+  }, 1000);
+}
+
+function updateScore() {
+  scoreWonSpan.textContent = scoreWon;
+  scoreLostSpan.textContent = scoreLost;
 }
 
 function drawEyes() {
