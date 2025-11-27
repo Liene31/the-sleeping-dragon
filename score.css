@@ -12,6 +12,10 @@ main {
   border-radius: 1rem;
   border: 1px solid var(--color-yellow);
 
+  @media (max-width: 360px) {
+    padding: 1rem 0.8rem;
+  }
+
   h1 {
     text-align: center;
     font-family: var(--font-secondary);
@@ -40,12 +44,20 @@ table.score-table {
   th,
   td {
     padding: 0.8rem 0.85rem;
+
+    @media (max-width: 360px) {
+      padding: 0.5rem 0.55rem;
+    }
   }
 
   th {
     text-transform: uppercase;
     letter-spacing: 0.09rem;
     font-size: 0.9rem;
+
+    @media (max-width: 360px) {
+      font-size: 0.75rem;
+    }
   }
 
   /* Body rows: zebra stripes */
