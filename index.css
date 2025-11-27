@@ -1,6 +1,4 @@
 main {
-  font-family: var(--font-primary);
-  color: var(--color-yellow);
   padding: 2rem 1rem;
 }
 .home-view {
