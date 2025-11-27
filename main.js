@@ -147,11 +147,11 @@ function closeCategoryModal() {
   chooseCategoryModalSection.style.display = "none";
 }
 
-function openGamePlayView(word, category, type) {
+function openGamePlayView(word, category, type, hint) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `${category} ${type}`;
-  gamePlayViewPara.textContent = `6 guesses, free hint`;
+  gamePlayViewPara.textContent = `6 guesses, ${hint}`;
   console.log(`word to guess is ${word}`);
   qwertyDiv.classList.remove("disable-clicks");
   qwertyDiv.innerHTML = "";
@@ -167,6 +167,11 @@ function openGamePlayView(word, category, type) {
   if (category === "Timed") {
     displayTimer();
     timerContainerDiv.style.display = "flex";
+  }
+
+  if (category === "Learning") {
+    hintBtn.style.display = "none";
+    getDefinition();
   }
 }
 
@@ -361,31 +366,31 @@ function getWord(category) {
 
       if (category === "Easy") {
         wordToGuess = generateRandomWord(easyArray);
-        openGamePlayView(wordToGuess, category, "Level");
+        openGamePlayView(wordToGuess, category, "Level", "free hint");
       } else if (category === "Medium") {
         wordToGuess = generateRandomWord(mediumArray);
-        openGamePlayView(wordToGuess, category, "Level");
+        openGamePlayView(wordToGuess, category, "Level", "hint costs a life");
       } else if (category === "Difficult") {
         wordToGuess = generateRandomWord(difficultArray);
-        openGamePlayView(wordToGuess, category, "Level");
+        openGamePlayView(wordToGuess, category, "Level", "hint costs a life");
       } else if (category === "Timed") {
         wordToGuess = generateRandomWord(timedArray);
-        openGamePlayView(wordToGuess, category, "Mode");
+        openGamePlayView(wordToGuess, category, "Mode", "free hint");
       } else if (category === "Learning") {
         wordToGuess = generateRandomWord(learningArray);
-        openGamePlayView(wordToGuess, category, "Mode");
+        openGamePlayView(wordToGuess, category, "Mode", "no hints");
       } else if (category === "Animals") {
         wordToGuess = generateRandomWord(animalsArray);
-        openGamePlayView(wordToGuess, category, "Category");
+        openGamePlayView(wordToGuess, category, "Category", "free hint");
       } else if (category === "Gastronomy") {
         wordToGuess = generateRandomWord(gastronomyArray);
-        openGamePlayView(wordToGuess, category, "Category");
+        openGamePlayView(wordToGuess, category, "Category", "free hint");
       } else if (category === "Geography") {
         wordToGuess = generateRandomWord(geographyArray);
-        openGamePlayView(wordToGuess, category, "Category");
+        openGamePlayView(wordToGuess, category, "Category", "free hint");
       } else if (category === "Hobbies") {
         wordToGuess = generateRandomWord(hobbiesArray);
-        openGamePlayView(wordToGuess, category, "Category");
+        openGamePlayView(wordToGuess, category, "Category", "free hint");
       }
     })
     .catch((error) => console.error(error.message));
@@ -399,6 +404,12 @@ function getDefinition() {
     .get(apiUrl)
     .then((res) => {
       const definition = res.data[0].shortdef[0];
+      if (category === "Medium" || category === "Difficult") {
+        guess--;
+        drawEyes();
+        hintBtn.disabled = true;
+      }
+
       revealDefinition(definition);
     })
     .catch((error) => console.error(error.message));
@@ -407,6 +418,7 @@ function getDefinition() {
 function restartGame() {
   getWord(category);
   guess = 6;
+  hintBtn.disabled = false;
 }
 
 const defaultScore = {
