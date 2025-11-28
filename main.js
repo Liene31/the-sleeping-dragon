@@ -114,9 +114,9 @@ const savedTheme = localStorage.getItem("theme");
 //return true or false
 let isDarkTheme = !(savedTheme === "dark");
 
-console.log(isDarkTheme);
-
-//load the page and executes the function
+//re-load the page and executes the function (isDakTheme is re-evaluated)
+//when change theme Btn is clicked it doesn't reload the page
+//and continue with what's already saved in isDarkTheme
 window.addEventListener("DOMContentLoaded", () => {
   changeTheme();
 });
