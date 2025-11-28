@@ -31,6 +31,10 @@ const dragonEyeDiv = document.getElementById("dragon-eye");
 const scoreWonSpan = document.getElementById("score-won");
 const scoreLostSpan = document.getElementById("score-lost");
 
+const tableBody = document.getElementById("table-body");
+const totalWonTd = document.getElementById("total-won");
+const totalLostTd = document.getElementById("total-lost");
+
 const difficultyLvlCloseBtn = document.getElementById(
   "difficulty-lvl-close-btn"
 );
@@ -56,6 +60,8 @@ let guess = 6;
 let scoreWon = 0;
 let scoreLost = 0;
 let guessedLettersArray = [];
+const totalWon = [];
+const totalLost = [];
 
 checkIfElExists(classicalModeDiv, "click", openDifficultyModal);
 checkIfElExists(timedModeDiv, "click", triggerTimedMode);
@@ -499,8 +505,6 @@ function getSum(scoreArray) {
   return scoreArray.reduce((acc, currentValue) => acc + currentValue, 0);
 }
 
-const tableBody = document.getElementById("table-body");
-
 //Creates the tbody tr, th, td and push in the scores from localStorage
 for (const categoryName in savedScores) {
   const category = savedScores[categoryName];
@@ -520,10 +524,18 @@ for (const categoryName in savedScores) {
   tableDataLost.textContent = `${lostSum}`;
 
   tableRow.append(tableHeader, tableDataWon, tableDataLost);
+  totalWon.push(wonSum);
+  totalLost.push(lostSum);
+
   //Checks if the element exists in the page
   if (tableBody) {
     tableBody.append(tableRow);
   }
+}
+
+if (totalWonTd || totalLostTd) {
+  totalWonTd.textContent = getSum(totalWon);
+  totalLostTd.textContent = getSum(totalLost);
 }
 
 // localStorage.clear();
