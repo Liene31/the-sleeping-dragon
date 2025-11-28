@@ -109,13 +109,26 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
   }
 });
 
-let isThemeClicked = true;
+const savedTheme = localStorage.getItem("theme");
+
+//return true or false
+let isDarkTheme = !(savedTheme === "dark");
+
+console.log(isDarkTheme);
+
+//load the page and executes the function
+window.addEventListener("DOMContentLoaded", () => {
+  changeTheme();
+});
+
 //Change the Theme of the WebSite
 function changeTheme() {
   const root = document.documentElement;
 
-  if (isThemeClicked) {
-    isThemeClicked = false;
+  if (isDarkTheme) {
+    isDarkTheme = false;
+    console.log(isDarkTheme);
+    localStorage.setItem("theme", "grey");
     root.style.setProperty("--color-bg-dark", "#707378");
     root.style.setProperty("--color-dark-1", "#2B2B2E");
     root.style.setProperty("--color-dark-2", "#1E1E20");
@@ -125,7 +138,9 @@ function changeTheme() {
     root.style.setProperty("--color-accent", "#FFF9EE");
     root.style.setProperty("--bg-image", "url(./images/dragon-grey-bg.jpg)");
   } else {
-    isThemeClicked = true;
+    isDarkTheme = true;
+    console.log(isDarkTheme);
+    localStorage.setItem("theme", "dark");
     root.style.setProperty("--color-bg-dark", "#1d0e09");
     root.style.setProperty("--color-dark-1", "#3c342e");
     root.style.setProperty("--color-dark-2", "#302924");
