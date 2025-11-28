@@ -161,11 +161,8 @@ main {
   display: none; /*flex, none*/
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: 0 1.5rem;
   height: 99%;
-  background: var(--color-opacity);
-  border: 1px solid var(--color-yellow);
-  border-radius: 1rem;
 
   .game-play-header {
     display: flex;

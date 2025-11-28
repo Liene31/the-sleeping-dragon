@@ -224,6 +224,9 @@ function guessWord(letterClicked) {
       clearInterval(timer);
       gameEnd(letterArray, "lost");
     }
+    if ((category === "Medium" || category === "Difficult") && guess < 2) {
+      hintBtn.disabled = true;
+    }
   }
 
   if (guessedLettersArray.toString() === letterArray.toString()) {
@@ -409,8 +412,10 @@ function getDefinition() {
         drawEyes();
         hintBtn.disabled = true;
       }
+      //"No luck, adventurer. The hint has vanished into the void."
 
       revealDefinition(definition);
+      console.log(definition);
     })
     .catch((error) => console.error(error.message));
 }
