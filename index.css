@@ -160,7 +160,7 @@ main {
 .game-play-view {
   display: none; /*flex, none*/
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1.5rem;
   height: 99%;
   background: var(--color-opacity);
