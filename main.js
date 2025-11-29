@@ -188,6 +188,9 @@ function openGamePlayView(word, category, type, hint) {
   if (category === "Timed") {
     displayTimer();
     timerContainerDiv.style.display = "flex";
+  } else {
+    timerContainerDiv.style.display = "none";
+    clearInterval(timer);
   }
 
   if (category === "Learning") {
@@ -227,7 +230,7 @@ function triggerLearningMode() {
 function guessWord(letterClicked) {
   const letterArray = [...wordToGuess];
   letterClicked = letterClicked.toLowerCase();
-  isLetterCorrect = false;
+  let isLetterCorrect = false;
 
   letterArray.forEach((letter, i) => {
     if (letterClicked === letter) {
@@ -283,7 +286,7 @@ function getPressedLetter(e) {
   letterClicked = e.target.textContent;
 
   if (!e.target.classList.contains("transparent")) {
-    e.target.className += " transparent";
+    e.target.classList.add("transparent");
     guessWord(letterClicked);
   }
 }
@@ -548,8 +551,11 @@ for (const categoryName in savedScores) {
   }
 }
 
-if (totalWonTd || totalLostTd) {
+if (totalWonTd) {
   totalWonTd.textContent = getSum(totalWon);
+}
+
+if (totalLostTd) {
   totalLostTd.textContent = getSum(totalLost);
 }
 
