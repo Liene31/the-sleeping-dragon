@@ -37,8 +37,7 @@ h3 {
 }
 
 .storyline p,
-.rules p,
-.rules li {
+.rules p {
   font-family: var(--font-primary);
   line-height: 1.6;
   font-size: 1rem;
@@ -64,8 +63,6 @@ h3 {
     padding-right: 0.5rem;
   }
 }
-
-/*--------------------------------------*/
 
 .rules-wrapper {
   display: flex;

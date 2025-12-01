@@ -42,7 +42,6 @@ const categoryCloseBtn = document.getElementById("category-close-btn");
 
 const playAgainBtn = document.getElementById("play-again-btn");
 const hintBtn = document.getElementById("hint-btn");
-const homeBtn = document.getElementById("home-btn");
 const siteThemeBtn = document.querySelectorAll(".theme");
 
 const qwertyArray = [
@@ -72,7 +71,6 @@ checkIfElExists(difficultyLvlCloseBtn, "click", closeDifficultyLvl);
 checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
 checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
-checkIfElExists(homeBtn, "click", saveScore);
 
 //Check if the element exists on the page
 function checkIfElExists(selector, event, handler) {
@@ -489,11 +487,11 @@ const defaultScore = {
   },
 };
 
+//To clean localStorage from Score, replace savedScore with defaultScore
 const savedScores =
   JSON.parse(localStorage.getItem("savedScores")) || defaultScore;
 
-//Save the score to localStorage when navigate away from the page gamePlay view
-function saveScore() {
+window.addEventListener("beforeunload", () => {
   const mapCategory = {
     Easy: "easy",
     Medium: "medium",
@@ -505,63 +503,64 @@ function saveScore() {
     Geography: "geography",
     Hobbies: "hobbies",
   };
-
   const key = mapCategory[category];
-
   if (scoreWon > 0) {
     savedScores[key].won.push(scoreWon);
   }
   if (scoreLost > 0) {
     savedScores[key].lost.push(scoreLost);
   }
-
   localStorage.setItem("savedScores", JSON.stringify(savedScores));
-}
-
-// window.addEventListener("beforeunload", beforeUnloadListener);
-window.addEventListener("", (e) => {
-  e.preventDefault();
-  console.log("closing");
 });
 
 function getSum(scoreArray) {
   return scoreArray.reduce((acc, currentValue) => acc + currentValue, 0);
 }
 
+if (document.title.includes("Score")) {
+  createScoreTable();
+}
+
 //Creates the tbody tr, th, td and push in the scores from localStorage
-for (const categoryName in savedScores) {
-  const category = savedScores[categoryName];
-  const wonArray = category.won;
-  const wonSum = getSum(wonArray);
-  const lostArray = category.lost;
-  const lostSum = getSum(lostArray);
+function createScoreTable() {
+  for (const categoryName in savedScores) {
+    const category = savedScores[categoryName];
+    const wonArray = category.won;
+    const wonSum = getSum(wonArray);
+    const lostArray = category.lost;
+    const lostSum = getSum(lostArray);
 
-  const tableRow = document.createElement("tr");
-  const tableHeader = document.createElement("th");
-  const tableDataWon = document.createElement("td");
-  const tableDataLost = document.createElement("td");
+    const tableRow = document.createElement("tr");
+    const tableHeader = document.createElement("th");
+    const tableDataWon = document.createElement("td");
+    const tableDataLost = document.createElement("td");
 
-  tableHeader.setAttribute("scope", "row");
-  tableHeader.textContent = `${categoryName}`;
-  tableDataWon.textContent = `${wonSum}`;
-  tableDataLost.textContent = `${lostSum}`;
+    tableHeader.setAttribute("scope", "row");
+    tableHeader.textContent = `${categoryName}`;
+    tableDataWon.textContent = `${wonSum}`;
+    tableDataLost.textContent = `${lostSum}`;
 
-  tableRow.append(tableHeader, tableDataWon, tableDataLost);
-  totalWon.push(wonSum);
-  totalLost.push(lostSum);
+    tableRow.append(tableHeader, tableDataWon, tableDataLost);
+    totalWon.push(wonSum);
+    totalLost.push(lostSum);
 
-  //Checks if the element exists in the page
-  if (tableBody) {
-    tableBody.append(tableRow);
+    //Checks if the element exists in the page
+    if (tableBody) {
+      tableBody.append(tableRow);
+    }
+
+    addTotalScoreToTable();
   }
 }
 
-if (totalWonTd) {
-  totalWonTd.textContent = getSum(totalWon);
-}
+function addTotalScoreToTable() {
+  if (totalWonTd) {
+    totalWonTd.textContent = getSum(totalWon);
+  }
 
-if (totalLostTd) {
-  totalLostTd.textContent = getSum(totalLost);
+  if (totalLostTd) {
+    totalLostTd.textContent = getSum(totalLost);
+  }
 }
 
 // localStorage.clear();
