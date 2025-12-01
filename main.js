@@ -428,16 +428,20 @@ function getDefinition() {
   axios
     .get(apiUrl)
     .then((res) => {
-      const definition = res.data[0].shortdef[0];
-      if (category === "Medium" || category === "Difficult") {
-        guess--;
-        drawEyes();
-        hintBtn.disabled = true;
-      }
-      //"No luck, adventurer. The hint has vanished into the void."
+      if (res.data.length === 0 || res.data[0].shortdef === undefined) {
+        revealDefinition(
+          "No luck, adventurer. The hint has vanished into the void."
+        );
+      } else {
+        const definition = res.data[0].shortdef[0];
+        if (category === "Medium" || category === "Difficult") {
+          guess--;
+          drawEyes();
+          hintBtn.disabled = true;
+        }
 
-      revealDefinition(definition);
-      console.log(definition);
+        revealDefinition(definition);
+      }
     })
     .catch((error) => console.error(error.message));
 }
