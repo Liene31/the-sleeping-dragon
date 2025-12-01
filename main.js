@@ -94,6 +94,7 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
     hamburgerMenuIconSpan.style.display = "none";
     closeMenuIconSpan.style.display = "block";
     isHamburgerMenuClicked = false;
+    document.body.style.overflowY = "hidden";
 
     if (window.matchMedia("(max-width: 650px)").matches) {
       document.querySelector(".menu").style.display = "flex";
@@ -102,6 +103,7 @@ document.getElementById("hamburger-menu").addEventListener("click", () => {
     hamburgerMenuIconSpan.style.display = "block";
     closeMenuIconSpan.style.display = "none";
     isHamburgerMenuClicked = true;
+    document.body.style.overflowY = "visible";
 
     if (window.matchMedia("(max-width: 650px)").matches) {
       document.querySelector(".menu").style.display = "none";
@@ -168,7 +170,7 @@ function closeCategoryModal() {
   chooseCategoryModalSection.style.display = "none";
 }
 
-function openGamePlayView(word, category, type, hint) {
+function openGamePlayView(word, type, hint) {
   homeViewSection.style.display = "none";
   gamePlayViewSection.style.display = "flex";
   gamePlayViewTitle.textContent = `${category} ${type}`;
@@ -248,11 +250,14 @@ function guessWord(letterClicked) {
       clearInterval(timer);
       gameEnd(letterArray, "lost");
     }
+    //disable the hint btn if guesses less then two
+    //hints costs lives, if only one life left, player looses when hint is used
     if ((category === "Medium" || category === "Difficult") && guess < 2) {
       hintBtn.disabled = true;
     }
   }
 
+  //turn arrays in strings in order to compare
   if (guessedLettersArray.toString() === letterArray.toString()) {
     gameEnd([], "won");
     clearInterval(timer);
@@ -299,9 +304,8 @@ function revealDefinition(definition) {
 function displayTimer() {
   let sec = 35;
   timer = setInterval(() => {
-    sec < 10
-      ? (timerSpan.textContent = `00:0${sec}`)
-      : (timerSpan.textContent = `00:${sec}`);
+    //if less then 10, adds extra 0
+    timerSpan.textContent = `00:${sec.toString().padStart(2, "0")}`;
     sec--;
     if (sec < 0) {
       clearInterval(timer);
@@ -381,43 +385,39 @@ function getWord(category) {
   axios
     .get(jsonUrl)
     .then((res) => {
-      const easyArray = res.data.modes.easy.all;
-      const mediumArray = res.data.modes.medium.all;
-      const difficultArray = res.data.modes.difficult.all;
-      const timedArray = res.data.modes.timed.all;
-      const learningArray = res.data.modes.learning.all;
-      const animalsArray = res.data.categories.animals;
-      const gastronomyArray = res.data.categories.gastronomy;
-      const geographyArray = res.data.categories.geography;
-      const hobbiesArray = res.data.categories.hobbies;
+      const array =
+        res.data.modes[category.toLowerCase()]?.all ||
+        res.data.categories[category.toLowerCase()];
+      wordToGuess = generateRandomWord(array);
 
-      if (category === "Easy") {
-        wordToGuess = generateRandomWord(easyArray);
-        openGamePlayView(wordToGuess, category, "Level", "free hint");
-      } else if (category === "Medium") {
-        wordToGuess = generateRandomWord(mediumArray);
-        openGamePlayView(wordToGuess, category, "Level", "hint costs a life");
-      } else if (category === "Difficult") {
-        wordToGuess = generateRandomWord(difficultArray);
-        openGamePlayView(wordToGuess, category, "Level", "hint costs a life");
-      } else if (category === "Timed") {
-        wordToGuess = generateRandomWord(timedArray);
-        openGamePlayView(wordToGuess, category, "Mode", "free hint");
-      } else if (category === "Learning") {
-        wordToGuess = generateRandomWord(learningArray);
-        openGamePlayView(wordToGuess, category, "Mode", "no hints");
-      } else if (category === "Animals") {
-        wordToGuess = generateRandomWord(animalsArray);
-        openGamePlayView(wordToGuess, category, "Category", "free hint");
-      } else if (category === "Gastronomy") {
-        wordToGuess = generateRandomWord(gastronomyArray);
-        openGamePlayView(wordToGuess, category, "Category", "free hint");
-      } else if (category === "Geography") {
-        wordToGuess = generateRandomWord(geographyArray);
-        openGamePlayView(wordToGuess, category, "Category", "free hint");
-      } else if (category === "Hobbies") {
-        wordToGuess = generateRandomWord(hobbiesArray);
-        openGamePlayView(wordToGuess, category, "Category", "free hint");
+      switch (category) {
+        case "Easy":
+          openGamePlayView(wordToGuess, "Level", "free hint");
+          break;
+        case "Medium":
+          openGamePlayView(wordToGuess, "Level", "hint costs a life");
+          break;
+        case "Difficult":
+          openGamePlayView(wordToGuess, "Level", "hint costs a life");
+          break;
+        case "Timed":
+          openGamePlayView(wordToGuess, "Mode", "free hint");
+          break;
+        case "Learning":
+          openGamePlayView(wordToGuess, "Mode", "no hints");
+          break;
+        case "Animals":
+          openGamePlayView(wordToGuess, "Category", "free hint");
+          break;
+        case "Gastronomy":
+          openGamePlayView(wordToGuess, "Category", "free hint");
+          break;
+        case "Geography":
+          openGamePlayView(wordToGuess, "Category", "free hint");
+          break;
+        case "Hobbies":
+          openGamePlayView(wordToGuess, "Category", "free hint");
+          break;
       }
     })
     .catch((error) => console.error(error.message));
@@ -505,6 +505,7 @@ function saveScore() {
     Geography: "geography",
     Hobbies: "hobbies",
   };
+
   const key = mapCategory[category];
 
   if (scoreWon > 0) {
@@ -518,6 +519,10 @@ function saveScore() {
 }
 
 // window.addEventListener("beforeunload", beforeUnloadListener);
+window.addEventListener("", (e) => {
+  e.preventDefault();
+  console.log("closing");
+});
 
 function getSum(scoreArray) {
   return scoreArray.reduce((acc, currentValue) => acc + currentValue, 0);
