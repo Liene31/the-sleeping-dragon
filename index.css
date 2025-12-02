@@ -91,6 +91,10 @@ main {
   }
 }
 
+.disable-clicks {
+  pointer-events: none;
+}
+
 /* Modal */
 
 .modal {

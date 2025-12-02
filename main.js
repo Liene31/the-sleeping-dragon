@@ -2,6 +2,7 @@ const classicalModeDiv = document.getElementById("classical-mode");
 const timedModeDiv = document.getElementById("timed-mode");
 const categoryModeDiv = document.getElementById("category-mode");
 const learningModeDiv = document.getElementById("learning-mode");
+const gameModesDiv = document.getElementById("game-modes");
 
 const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
 const chooseCategoryDiv = document.querySelectorAll(".category");
@@ -154,18 +155,22 @@ function changeTheme() {
 
 function openDifficultyModal() {
   difficultyLevelModalSection.style.display = "flex";
+  gameModesDiv.classList.add("disable-clicks");
 }
 
 function openCategoryModal() {
   chooseCategoryModalSection.style.display = "flex";
+  gameModesDiv.classList.add("disable-clicks");
 }
 
 function closeDifficultyLvl() {
   difficultyLevelModalSection.style.display = "none";
+  gameModesDiv.classList.remove("disable-clicks");
 }
 
 function closeCategoryModal() {
   chooseCategoryModalSection.style.display = "none";
+  gameModesDiv.classList.remove("disable-clicks");
 }
 
 function openGamePlayView(word, type, hint) {
