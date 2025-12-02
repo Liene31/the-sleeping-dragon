@@ -342,15 +342,28 @@ function drawEyes() {
 
 function drawTile(length, targetDiv, array) {
   targetDiv.innerHTML = "";
-  for (let i = 0; i < length; i++) {
-    const div = document.createElement("div");
-    div.classList.add("tile");
+  if (targetDiv.classList[0] === "word-tile") {
+    for (let i = 0; i < length; i++) {
+      const div = document.createElement("div");
+      div.classList.add("tile");
 
-    if (array) {
-      div.textContent = array[i];
+      if (array) {
+        div.textContent = array[i];
+      }
+
+      targetDiv.append(div);
     }
+  } else {
+    for (let i = 0; i < length; i++) {
+      const btn = document.createElement("button");
+      btn.classList.add("tile");
 
-    targetDiv.append(div);
+      if (array) {
+        btn.textContent = array[i];
+      }
+
+      targetDiv.append(btn);
+    }
   }
 }
 
