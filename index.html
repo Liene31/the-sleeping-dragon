@@ -39,7 +39,10 @@
             <li><a href="./contact.html">contact</a></li>
             <li>
               <a href=""
-                ><span class="material-icons display-light-mode theme">
+                ><span
+                  class="material-icons display-light-mode theme"
+                  role="button"
+                >
                   light_mode
                 </span></a
               >
@@ -69,28 +72,28 @@
           <h2>Guess a secret word before the dragon awakens</h2>
         </div>
         <div class="game-modes" id="game-modes">
-          <div class="mode" id="classical-mode">
+          <button class="mode" id="classical-mode">
             <h3>classical</h3>
             <p>Choose from three levels - easy, medium or difficult</p>
-          </div>
-          <div class="mode" id="timed-mode">
+          </button>
+          <button class="mode" id="timed-mode">
             <h3>timed</h3>
             <p>Challenge yourself with timed mode</p>
-          </div>
-          <div class="mode" id="category-mode">
+          </button>
+          <button class="mode" id="category-mode">
             <h3>category</h3>
             <p>Choose from different categories - animals, sport etc</p>
-          </div>
-          <div class="mode" id="learning-mode">
+          </button>
+          <button class="mode" id="learning-mode">
             <h3>learning</h3>
             <p>Read the definition and guess the word</p>
-          </div>
+          </button>
         </div>
       </section>
 
       <!-- Classical Mode - Difficulty Levels Modal -->
       <section class="modal difficulty-level-modal" id="difficulty-level-modal">
-        <button>
+        <button type="button">
           <span
             class="material-icons modal-close-btn difficulty-lvl-close-btn"
             id="difficulty-lvl-close-btn"
@@ -99,9 +102,9 @@
           </span>
         </button>
         <div class="difficulty-levels-container modal-container">
-          <div class="difficulty-level modal-el">Easy</div>
-          <div class="difficulty-level modal-el">Medium</div>
-          <div class="difficulty-level modal-el">Difficult</div>
+          <button class="difficulty-level modal-el">Easy</button>
+          <button class="difficulty-level modal-el">Medium</button>
+          <button class="difficulty-level modal-el">Difficult</button>
         </div>
       </section>
 
@@ -116,10 +119,10 @@
           </span>
         </button>
         <div class="category-container modal-container" id="category-container">
-          <div class="category modal-el">Animals</div>
-          <div class="category modal-el">Gastronomy</div>
-          <div class="category modal-el">Geography</div>
-          <div class="category modal-el">Hobbies</div>
+          <button class="category modal-el">Animals</button>
+          <button class="category modal-el">Gastronomy</button>
+          <button class="category modal-el">Geography</button>
+          <button class="category modal-el">Hobbies</button>
         </div>
       </section>
 
