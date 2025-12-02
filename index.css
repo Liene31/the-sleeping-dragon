@@ -56,9 +56,13 @@ main {
     border: 1px solid var(--color-yellow);
     background-color: var(--color-opacity);
     border-radius: 4rem 0.5rem 4rem 0.5rem;
-    width: 70%;
+    width: 60%;
     padding: 1rem;
     cursor: pointer;
+
+    @media (max-width: 590px) {
+      width: 95%;
+    }
 
     @media (min-width: 690px) {
       width: 290px;
