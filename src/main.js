@@ -137,7 +137,10 @@ function changeTheme() {
     root.style.setProperty("--color-opacity", "rgb(15,15,17, 0.7)");
     root.style.setProperty("--color-yellow", "#E0B548");
     root.style.setProperty("--color-accent", "#FFF9EE");
-    root.style.setProperty("--bg-image", "url(./images/dragon-grey-bg.jpg)");
+    root.style.setProperty(
+      "--bg-image",
+      "url(../assets/images/dragon-grey-bg.jpg)"
+    );
   } else {
     isDarkTheme = true;
     console.log(isDarkTheme);
@@ -149,7 +152,7 @@ function changeTheme() {
     root.style.setProperty("--color-opacity", "rgba(26, 12, 9, 0.7)");
     root.style.setProperty("--color-yellow", "#eeb84c");
     root.style.setProperty("--color-accent", "#ebdbab");
-    root.style.setProperty("--bg-image", "url(./images/dragon-bg.jpg)");
+    root.style.setProperty("--bg-image", "url(../assets/images/dragon-bg.jpg)");
   }
 }
 
@@ -327,14 +330,14 @@ function drawEyes() {
   for (let c = 0; c < 6 - guess; c++) {
     const imgEL = document.createElement("img");
     imgEL.classList.add("eye-closed");
-    imgEL.src = "./images/eye-open.svg";
+    imgEL.src = "../assets/images/eye-open.svg";
     imgEL.alt = "icon of eye closed";
     dragonEyeDiv.append(imgEL);
   }
   for (let i = 0; i < guess; i++) {
     const imgEL = document.createElement("img");
     imgEL.classList.add("eye-closed");
-    imgEL.src = "./images/eye-closed.svg";
+    imgEL.src = "../assets/images/eye-closed.svg";
     imgEL.alt = "icon of eye closed";
     dragonEyeDiv.append(imgEL);
   }
@@ -397,7 +400,7 @@ function generateRandomWord(array) {
 }
 
 function getWord(category) {
-  const jsonUrl = "./words.json";
+  const jsonUrl = "./data/words.json";
   axios
     .get(jsonUrl)
     .then((res) => {

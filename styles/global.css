@@ -16,7 +16,7 @@
   --color-opacity: rgba(26, 12, 9, 0.7); /* Opacity 70%*/
   --color-yellow: #eeb84c;
   --color-accent: #ebdbab;
-  --bg-image: url(./images/dragon-bg.jpg);
+  --bg-image: url(../assets/images/dragon-bg.jpg);
   --font-primary: "Cardo", serif;
   --font-secondary: "Cinzel Decorative", serif;
 }
