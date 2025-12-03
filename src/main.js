@@ -1,49 +1,35 @@
-const classicalModeDiv = document.getElementById("classical-mode");
-const timedModeDiv = document.getElementById("timed-mode");
-const categoryModeDiv = document.getElementById("category-mode");
-const learningModeDiv = document.getElementById("learning-mode");
-const gameModesDiv = document.getElementById("game-modes");
-
-const difficultyLevelDiv = document.querySelectorAll(".difficulty-level");
-const chooseCategoryDiv = document.querySelectorAll(".category");
-
-const difficultyLevelModalSection = document.getElementById(
-  "difficulty-level-modal"
-);
-const chooseCategoryModalSection = document.getElementById(
-  "choose-category-modal"
-);
-const homeViewSection = document.getElementById("home-view");
-const gamePlayViewSection = document.getElementById("game-play-view");
-
-const gamePlayViewTitle = document.getElementById("game-play-view-title");
-const gamePlayViewPara = document.getElementById("game-play-view-desc");
-
-const definitionContainerDiv = document.getElementById("definition-container");
-const definitionPara = document.getElementById("definition");
-
-const timerContainerDiv = document.getElementById("timer-container");
-const timerSpan = document.getElementById("timer");
-
-const wordTileDiv = document.getElementById("word-tile");
-const qwertyDiv = document.getElementById("qwerty");
-const dragonEyeDiv = document.getElementById("dragon-eye");
-
-const scoreWonSpan = document.getElementById("score-won");
-const scoreLostSpan = document.getElementById("score-lost");
-
-const tableBody = document.getElementById("table-body");
-const totalWonTd = document.getElementById("total-won");
-const totalLostTd = document.getElementById("total-lost");
-
-const difficultyLvlCloseBtn = document.getElementById(
-  "difficulty-lvl-close-btn"
-);
-const categoryCloseBtn = document.getElementById("category-close-btn");
-
-const playAgainBtn = document.getElementById("play-again-btn");
-const hintBtn = document.getElementById("hint-btn");
-const siteThemeBtn = document.querySelectorAll(".theme");
+import {
+  classicalModeDiv,
+  timedModeDiv,
+  categoryModeDiv,
+  learningModeDiv,
+  gameModesDiv,
+  difficultyLevelDiv,
+  chooseCategoryDiv,
+  difficultyLevelModalSection,
+  chooseCategoryModalSection,
+  homeViewSection,
+  gamePlayViewSection,
+  gamePlayViewTitle,
+  gamePlayViewPara,
+  definitionContainerDiv,
+  definitionPara,
+  timerContainerDiv,
+  timerSpan,
+  wordTileDiv,
+  qwertyDiv,
+  dragonEyeDiv,
+  scoreWonSpan,
+  scoreLostSpan,
+  tableBody,
+  totalWonTd,
+  totalLostTd,
+  difficultyLvlCloseBtn,
+  categoryCloseBtn,
+  playAgainBtn,
+  hintBtn,
+  siteThemeBtn,
+} from "./const.js";
 
 const qwertyArray = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
