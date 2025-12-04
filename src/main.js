@@ -31,11 +31,7 @@ import {
   siteThemeBtn,
 } from "./const.js";
 
-const qwertyArray = [
-  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-  ["Z", "X", "C", "V", "B", "N", "M"],
-];
+import { qwertyArray, defaultScore } from "./test.js";
 
 let isHamburgerMenuClicked = true;
 let wordToGuess = "";
@@ -458,45 +454,6 @@ function restartGame() {
   guess = 6;
   hintBtn.disabled = false;
 }
-
-const defaultScore = {
-  easy: {
-    won: [],
-    lost: [],
-  },
-  medium: {
-    won: [],
-    lost: [],
-  },
-  hard: {
-    won: [],
-    lost: [],
-  },
-  timed: {
-    won: [],
-    lost: [],
-  },
-  learning: {
-    won: [],
-    lost: [],
-  },
-  animals: {
-    won: [],
-    lost: [],
-  },
-  gastronomy: {
-    won: [],
-    lost: [],
-  },
-  geography: {
-    won: [],
-    lost: [],
-  },
-  hobbies: {
-    won: [],
-    lost: [],
-  },
-};
 
 //To clean localStorage from Score, replace savedScore with defaultScore
 const savedScores =
