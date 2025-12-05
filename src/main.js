@@ -31,7 +31,8 @@ import {
   siteThemeBtn,
 } from "./const.js";
 
-import { qwertyArray, defaultScore } from "./test.js";
+import { qwertyArray, defaultScore } from "./gameData.js";
+import { checkIfElExists, generateRandomWord, getSum } from "./utility.js";
 
 let isHamburgerMenuClicked = true;
 let wordToGuess = "";
@@ -54,13 +55,6 @@ checkIfElExists(difficultyLvlCloseBtn, "click", closeDifficultyLvl);
 checkIfElExists(categoryCloseBtn, "click", closeCategoryModal);
 checkIfElExists(hintBtn, "click", getDefinition);
 checkIfElExists(playAgainBtn, "click", restartGame);
-
-//Check if the element exists on the page
-function checkIfElExists(selector, event, handler) {
-  if (selector) {
-    selector.addEventListener(event, handler);
-  }
-}
 
 siteThemeBtn.forEach((theme) => {
   theme.addEventListener("click", changeTheme);
@@ -370,17 +364,6 @@ function drawQwerty() {
   drawQwertyRow(7, 2);
 }
 
-function generateRandomNum(length) {
-  return Math.floor(Math.random() * length);
-}
-
-function generateRandomWord(array) {
-  const randomNum = generateRandomNum(array.length);
-  console.log(array.length);
-  const randomWord = array[randomNum];
-  return randomWord;
-}
-
 function getWord(category) {
   const jsonUrl = "./data/words.json";
   axios
@@ -480,10 +463,6 @@ window.addEventListener("beforeunload", () => {
   }
   localStorage.setItem("savedScores", JSON.stringify(savedScores));
 });
-
-function getSum(scoreArray) {
-  return scoreArray.reduce((acc, currentValue) => acc + currentValue, 0);
-}
 
 if (document.title.includes("Score")) {
   createScoreTable();
